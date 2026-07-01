@@ -114,7 +114,7 @@ export default function PostEditor() {
       }
 
       toast.success('게시글이 등록되었습니다!');
-      router.push(`/post/${post.id}`);
+      router.push(`/post?id=${post.id}`);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : '오류가 발생했습니다.');
     } finally {

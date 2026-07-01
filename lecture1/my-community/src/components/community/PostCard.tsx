@@ -33,7 +33,7 @@ export default function PostCard({ post, index = 0 }: { post: Post; index?: numb
       transition={{ duration: 0.5, delay: index * 0.08, ease: 'easeOut' }}
       className="group bg-[#FDF4F6] border border-[#E8D8DC] rounded-2xl overflow-hidden card-hover"
     >
-      <Link href={`/post/${post.id}`} aria-label={`게시글: ${post.title}`}>
+      <Link href={`/post?id=${post.id}`} aria-label={`게시글: ${post.title}`}>
         {/* Thumbnail */}
         <div className="relative overflow-hidden bg-[#E8DFC8]" style={{ aspectRatio: '4/3' }}>
           {post.thumbnail ? (
@@ -77,7 +77,7 @@ export default function PostCard({ post, index = 0 }: { post: Post; index?: numb
         </div>
 
         {/* Title */}
-        <Link href={`/post/${post.id}`}>
+        <Link href={`/post?id=${post.id}`}>
           <h2 className="text-editorial text-base md:text-lg font-semibold text-foreground leading-snug hover:text-[#B8122A] transition-colors line-clamp-2 mb-3">
             {post.title}
           </h2>

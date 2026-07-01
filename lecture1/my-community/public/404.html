@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>My Community</title>
+  <script>
+    // GitHub Pages SPA 라우팅 핵: 404를 index로 리다이렉트
+    var pathSegmentsToKeep = 4; // /AI_VIBE/lecture1/my-community/ = 3 segments
+    var l = window.location;
+    l.replace(
+      l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+      l.pathname.split('/').slice(0, pathSegmentsToKeep).join('/') + '/?p=' +
+      l.pathname.split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+      (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+      l.hash
+    );
+  </script>
+</head>
+<body></body>
+</html>
