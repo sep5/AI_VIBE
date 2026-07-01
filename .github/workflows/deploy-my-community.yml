@@ -42,10 +42,16 @@ jobs:
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
         run: npm run build
 
+      - name: Prepare site structure
+        working-directory: ${{ github.workspace }}
+        run: |
+          mkdir -p _site/lecture1/my-community
+          cp -r lecture1/my-community/out/. _site/lecture1/my-community/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: lecture1/my-community/out
+          path: _site
 
   deploy:
     environment:
