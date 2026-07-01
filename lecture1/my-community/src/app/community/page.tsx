@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
@@ -13,8 +13,8 @@ function CommunityContent() {
     <MainLayout>
       <div className="section-container py-12 md:py-16">
         <div className="mb-10">
-          <p className="text-xs tracking-[0.2em] uppercase text-[#8C7A6E] mb-2">Community</p>
-          <h1 className="text-editorial text-4xl md:text-5xl font-bold text-[#B8122A] mb-6">
+          <p className="text-xs tracking-[0.2em] uppercase text-[#7E6E62] mb-2">Community</p>
+          <h1 className="text-editorial text-4xl md:text-5xl font-bold text-[#C41E2A] mb-6">
             갤러리
           </h1>
           <div className="flex gap-2">
@@ -27,8 +27,8 @@ function CommunityContent() {
                 href={`?sort=${value}`}
                 className={`px-4 py-1.5 text-sm rounded-full border transition-colors duration-200 ${
                   sort === value
-                    ? 'bg-[#B8122A] text-white border-[#B8122A]'
-                    : 'border-[#E8D8DC] text-[#8C7A6E] hover:border-[#B8122A] hover:text-[#B8122A]'
+                    ? 'bg-[#C41E2A] text-white border-[#C41E2A]'
+                    : 'border-[#D8D0C8] text-[#7E6E62] hover:border-[#C41E2A] hover:text-[#C41E2A]'
                 }`}
               >
                 {label}
@@ -44,7 +44,7 @@ function CommunityContent() {
 
 export default function CommunityPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#FAE8EC]" />}>
+    <Suspense fallback={<div className="min-h-screen bg-[#EEE8DF]" />}>
       <CommunityContent />
     </Suspense>
   );

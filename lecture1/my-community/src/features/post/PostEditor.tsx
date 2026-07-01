@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useRef, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
@@ -130,28 +130,28 @@ export default function PostEditor() {
       transition={{ duration: 0.5 }}
     >
       <div className="mb-8">
-        <p className="text-xs tracking-[0.2em] uppercase text-[#8C7A6E] mb-2">Write</p>
-        <h1 className="text-editorial text-3xl md:text-4xl font-bold text-[#B8122A]">새 글 작성</h1>
+        <p className="text-xs tracking-[0.2em] uppercase text-[#7E6E62] mb-2">Write</p>
+        <h1 className="text-editorial text-3xl md:text-4xl font-bold text-[#C41E2A]">새 글 작성</h1>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
         {/* Title */}
         <div className="space-y-1.5">
-          <Label htmlFor="title" className="text-sm text-[#8C7A6E]">제목</Label>
+          <Label htmlFor="title" className="text-sm text-[#7E6E62]">제목</Label>
           <Input
             id="title"
             placeholder="제목을 입력해주세요"
             {...register('title')}
-            className="bg-white border-[#E8D8DC] focus:border-[#B8122A] text-base"
+            className="bg-white border-[#D8D0C8] focus:border-[#C41E2A] text-base"
           />
           {errors.title && <p className="text-xs text-red-500">{errors.title.message}</p>}
         </div>
 
         {/* Thumbnail */}
         <div className="space-y-1.5">
-          <Label className="text-sm text-[#8C7A6E]">대표 이미지</Label>
+          <Label className="text-sm text-[#7E6E62]">대표 이미지</Label>
           {thumbnailPreview ? (
-            <div className="relative rounded-xl overflow-hidden bg-[#E8DFC8]" style={{ aspectRatio: '16/9' }}>
+            <div className="relative rounded-xl overflow-hidden bg-[#E4DDD0]" style={{ aspectRatio: '16/9' }}>
               <Image src={thumbnailPreview} alt="대표 이미지 미리보기" fill className="object-cover" />
               <button
                 type="button"
@@ -165,7 +165,7 @@ export default function PostEditor() {
           ) : (
             <div
               className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-colors ${
-                isDragging ? 'border-[#B8122A] bg-[#B8122A]/5' : 'border-[#E8D8DC] hover:border-[#B8122A] bg-white'
+                isDragging ? 'border-[#C41E2A] bg-[#C41E2A]/5' : 'border-[#D8D0C8] hover:border-[#C41E2A] bg-white'
               }`}
               onClick={() => thumbnailRef.current?.click()}
               onDrop={(e) => onDrop(e, 'thumbnail')}
@@ -174,9 +174,9 @@ export default function PostEditor() {
               role="button"
               aria-label="대표 이미지 업로드"
             >
-              <Upload size={24} className="mx-auto mb-2 text-[#8C7A6E]" />
-              <p className="text-sm text-[#8C7A6E]">드래그하거나 클릭하여 이미지를 업로드하세요</p>
-              <p className="text-xs text-[#8C7A6E]/60 mt-1">JPG, PNG, WebP (최대 10MB)</p>
+              <Upload size={24} className="mx-auto mb-2 text-[#7E6E62]" />
+              <p className="text-sm text-[#7E6E62]">드래그하거나 클릭하여 이미지를 업로드하세요</p>
+              <p className="text-xs text-[#7E6E62]/60 mt-1">JPG, PNG, WebP (최대 10MB)</p>
             </div>
           )}
           <input
@@ -190,23 +190,23 @@ export default function PostEditor() {
 
         {/* Content */}
         <div className="space-y-1.5">
-          <Label htmlFor="content" className="text-sm text-[#8C7A6E]">내용</Label>
+          <Label htmlFor="content" className="text-sm text-[#7E6E62]">내용</Label>
           <Textarea
             id="content"
             placeholder="내용을 입력해주세요..."
             rows={10}
             {...register('content')}
-            className="resize-none bg-white border-[#E8D8DC] focus:border-[#B8122A] text-sm leading-relaxed"
+            className="resize-none bg-white border-[#D8D0C8] focus:border-[#C41E2A] text-sm leading-relaxed"
           />
           {errors.content && <p className="text-xs text-red-500">{errors.content.message}</p>}
         </div>
 
         {/* Additional Images */}
         <div className="space-y-3">
-          <Label className="text-sm text-[#8C7A6E]">추가 이미지</Label>
+          <Label className="text-sm text-[#7E6E62]">추가 이미지</Label>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {additionalPreviews.map((src, i) => (
-              <div key={i} className="relative rounded-lg overflow-hidden bg-[#E8DFC8]" style={{ aspectRatio: '4/3' }}>
+              <div key={i} className="relative rounded-lg overflow-hidden bg-[#E4DDD0]" style={{ aspectRatio: '4/3' }}>
                 <Image src={src} alt={`추가 이미지 ${i + 1}`} fill className="object-cover" />
                 <button
                   type="button"
@@ -221,7 +221,7 @@ export default function PostEditor() {
             <button
               type="button"
               onClick={() => additionalRef.current?.click()}
-              className="flex flex-col items-center justify-center gap-1 rounded-lg border-2 border-dashed border-[#E8D8DC] text-[#8C7A6E] hover:border-[#B8122A] hover:text-[#B8122A] transition-colors bg-white"
+              className="flex flex-col items-center justify-center gap-1 rounded-lg border-2 border-dashed border-[#D8D0C8] text-[#7E6E62] hover:border-[#C41E2A] hover:text-[#C41E2A] transition-colors bg-white"
               style={{ aspectRatio: '4/3' }}
               aria-label="추가 이미지 업로드"
             >
@@ -244,7 +244,7 @@ export default function PostEditor() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="flex-1 py-3 bg-[#B8122A] text-white text-sm font-medium rounded-full hover:bg-[#8C0A1E] disabled:opacity-60 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+            className="flex-1 py-3 bg-[#C41E2A] text-white text-sm font-medium rounded-full hover:bg-[#9A1020] disabled:opacity-60 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
           >
             {isSubmitting && <Loader2 size={15} className="animate-spin" />}
             등록하기
@@ -252,7 +252,7 @@ export default function PostEditor() {
           <button
             type="button"
             onClick={() => router.back()}
-            className="px-6 py-3 border border-[#E8D8DC] text-[#8C7A6E] text-sm rounded-full hover:border-[#B8122A] hover:text-[#B8122A] transition-colors"
+            className="px-6 py-3 border border-[#D8D0C8] text-[#7E6E62] text-sm rounded-full hover:border-[#C41E2A] hover:text-[#C41E2A] transition-colors"
           >
             취소
           </button>

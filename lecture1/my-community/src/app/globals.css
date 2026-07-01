@@ -4,8 +4,8 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ─────────────────────────────────────────────
-   LessStress Color System — Design Tokens
-   출처: LessStress_ColorSystem.md
+   Vintage Editorial Color System
+   이미지 레퍼런스 기반 — 웜 크림 + 딥 레드 + 더스티 블루
 ───────────────────────────────────────────── */
 @theme inline {
   /* Color Tokens */
@@ -29,17 +29,17 @@
   --color-ring:              var(--ring);
 
   /* Brand Colors */
-  --color-brand-crimson:     #B8122A;
-  --color-brand-crimson-light: #D4304A;
-  --color-brand-crimson-dark: #8C0A1E;
-  --color-brand-green:       #4A7A30;
-  --color-brand-green-dark:  #3D6B28;
-  --color-brand-green-light: #7FB048;
-  --color-brand-beige:       #C9BA8A;
-  --color-brand-blush:       #FAE8EC;
-  --color-brand-card-beige:  #E8DFC8;
-  --color-brand-muted:       #8C7A6E;
-  --color-brand-border:      #E8D8DC;
+  --color-brand-crimson:       #C41E2A;   /* Vintage Deep Red */
+  --color-brand-crimson-light: #DA3050;
+  --color-brand-crimson-dark:  #9A1020;
+  --color-brand-blue:          #AAC4D6;   /* Dusty Blue */
+  --color-brand-blue-dark:     #3A6888;
+  --color-brand-blue-light:    #C4D8E8;
+  --color-brand-beige:         #C8B898;   /* Warm Beige */
+  --color-brand-cream:         #EEE8DF;   /* Warm Cream BG */
+  --color-brand-card:          #F7F3ED;   /* Card Background */
+  --color-brand-muted:         #7E6E62;   /* Muted Text */
+  --color-brand-border:        #D8D0C8;   /* Neutral Warm Border */
 
   /* Typography */
   --font-sans:    var(--font-inter);
@@ -67,70 +67,70 @@
 }
 
 /* ─────────────────────────────────────────────
-   Light Mode — LessStress Color System
+   Light Mode — Vintage Editorial
 ───────────────────────────────────────────── */
 :root {
-  --background:             #FAE8EC;   /* Blush Pink — 전체 페이지 배경 */
-  --foreground:             #2A1A1E;   /* 다크 와인 — 기본 텍스트 */
-  --card:                   #FDF4F6;   /* 카드 배경 — 더 밝은 블러시 */
-  --card-foreground:        #2A1A1E;
-  --popover:                #FDF4F6;
-  --popover-foreground:     #2A1A1E;
-  --primary:                #B8122A;   /* Crimson Red — CTA, 강조 */
+  --background:             #EEE8DF;   /* Warm Cream — 전체 페이지 배경 */
+  --foreground:             #28201A;   /* Warm Dark Brown — 기본 텍스트 */
+  --card:                   #F7F3ED;   /* 카드 배경 — 따뜻한 오프화이트 */
+  --card-foreground:        #28201A;
+  --popover:                #F7F3ED;
+  --popover-foreground:     #28201A;
+  --primary:                #C41E2A;   /* Vintage Deep Red — CTA, 강조 */
   --primary-foreground:     #FFFFFF;
-  --secondary:              #E8DFC8;   /* Soft Beige — 보조 배경 */
-  --secondary-foreground:   #2A1A1E;
-  --muted:                  #F0E0E4;   /* 뮤트 영역 */
-  --muted-foreground:       #8C7A6E;   /* 캡션, 보조 텍스트 */
-  --accent:                 #4A7A30;   /* Forest Green — 포인트 */
-  --accent-foreground:      #FFFFFF;
+  --secondary:              #E4DDD0;   /* Warm Beige — 보조 배경 */
+  --secondary-foreground:   #28201A;
+  --muted:                  #E8E2DA;   /* 뮤트 영역 */
+  --muted-foreground:       #7E6E62;   /* 캡션, 보조 텍스트 */
+  --accent:                 #AAC4D6;   /* Dusty Blue — 포인트 */
+  --accent-foreground:      #28201A;
   --destructive:            #DC2626;
-  --border:                 #E8D8DC;   /* 기본 구분선 */
-  --input:                  #E8D8DC;
-  --ring:                   #B8122A;
+  --border:                 #D8D0C8;   /* 기본 구분선 */
+  --input:                  #D8D0C8;
+  --ring:                   #C41E2A;
   --radius:                 0.5rem;
 
-  --sidebar:                #FDF4F6;
-  --sidebar-foreground:     #2A1A1E;
-  --sidebar-primary:        #B8122A;
+  --sidebar:                #F7F3ED;
+  --sidebar-foreground:     #28201A;
+  --sidebar-primary:        #C41E2A;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent:         #E8DFC8;
-  --sidebar-accent-foreground: #2A1A1E;
-  --sidebar-border:         #E8D8DC;
-  --sidebar-ring:           #B8122A;
+  --sidebar-accent:         #E4DDD0;
+  --sidebar-accent-foreground: #28201A;
+  --sidebar-border:         #D8D0C8;
+  --sidebar-ring:           #C41E2A;
 }
 
 /* ─────────────────────────────────────────────
-   Dark Mode — LessStress Dark Palette
+   Dark Mode
 ───────────────────────────────────────────── */
 .dark {
-  --background:             #2A1A1E;   /* 다크 와인 */
-  --foreground:             #F5EEF0;
-  --card:                   #3A2428;
-  --card-foreground:        #F5EEF0;
-  --popover:                #3A2428;
-  --popover-foreground:     #F5EEF0;
-  --primary:                #F5C0C8;   /* 소프트 로즈 */
-  --primary-foreground:     #2A1A1E;
-  --secondary:              #3A2E22;   /* 다크 베이지 */
-  --secondary-foreground:   #F5EEF0;
-  --muted:                  #3A2428;
-  --muted-foreground:       #A89890;
-  --accent:                 #2E4A1E;   /* 다크 그린 */
+  --background:             #1A1612;   /* 웜 블랙 */
+  --foreground:             #F0EBE3;
+  --card:                   #282218;
+  --card-foreground:        #F0EBE3;
+  --popover:                #282218;
+  --popover-foreground:     #F0EBE3;
+  --primary:                #E8A0A8;   /* 소프트 로즈 */
+  --primary-foreground:     #1A1612;
+  --secondary:              #302820;   /* 다크 베이지 */
+  --secondary-foreground:   #F0EBE3;
+  --muted:                  #282218;
+  --muted-foreground:       #A09080;
+  --accent:                 #3A6888;   /* 다크 블루 */
   --accent-foreground:      #FFFFFF;
   --destructive:            #EF4444;
-  --border:                 #3A2428;
-  --input:                  #4A3038;
-  --ring:                   #F5C0C8;
+  --border:                 #302820;
+  --input:                  #382C24;
+  --ring:                   #E8A0A8;
 
-  --sidebar:                #3A2428;
-  --sidebar-foreground:     #F5EEF0;
-  --sidebar-primary:        #F5C0C8;
-  --sidebar-primary-foreground: #2A1A1E;
-  --sidebar-accent:         #3A2E22;
-  --sidebar-accent-foreground: #F5EEF0;
-  --sidebar-border:         #4A3038;
-  --sidebar-ring:           #F5C0C8;
+  --sidebar:                #282218;
+  --sidebar-foreground:     #F0EBE3;
+  --sidebar-primary:        #E8A0A8;
+  --sidebar-primary-foreground: #1A1612;
+  --sidebar-accent:         #302820;
+  --sidebar-accent-foreground: #F0EBE3;
+  --sidebar-border:         #382C24;
+  --sidebar-ring:           #E8A0A8;
 }
 
 /* ─────────────────────────────────────────────
@@ -168,8 +168,8 @@
 
   /* Selection */
   ::selection {
-    background: #B8122A22;
-    color: #B8122A;
+    background: #C41E2A22;
+    color: #C41E2A;
   }
 
   img, video {

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -94,26 +94,26 @@ export default function AuthForm({ mode }: { mode: 'login' | 'signup' }) {
     >
       {/* Header */}
       <div className="text-center mb-8">
-        <Link href="/" className="text-editorial text-2xl font-bold text-[#B8122A]">
+        <Link href="/" className="text-editorial text-2xl font-bold text-[#C41E2A]">
           My Community
         </Link>
-        <p className="mt-2 text-sm text-[#8C7A6E]">
+        <p className="mt-2 text-sm text-[#7E6E62]">
           {isSignup ? '새 계정을 만들어보세요.' : '다시 만나서 반갑습니다.'}
         </p>
       </div>
 
       {/* Card */}
-      <div className="bg-[#FDF4F6] border border-[#E8D8DC] rounded-2xl p-8 shadow-sm">
+      <div className="bg-[#F7F3ED] border border-[#D8D0C8] rounded-2xl p-8 shadow-sm">
         <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
 
           {isSignup && (
             <div className="space-y-1.5">
-              <Label htmlFor="nickname" className="text-sm text-[#8C7A6E]">닉네임</Label>
+              <Label htmlFor="nickname" className="text-sm text-[#7E6E62]">닉네임</Label>
               <Input
                 id="nickname"
                 placeholder="홍길동"
                 {...register('nickname')}
-                className="bg-white border-[#E8D8DC] focus:border-[#B8122A] focus:ring-[#B8122A]/20"
+                className="bg-white border-[#D8D0C8] focus:border-[#C41E2A] focus:ring-[#C41E2A]/20"
                 aria-describedby={errors.nickname ? 'nickname-error' : undefined}
               />
               {errors.nickname && (
@@ -123,13 +123,13 @@ export default function AuthForm({ mode }: { mode: 'login' | 'signup' }) {
           )}
 
           <div className="space-y-1.5">
-            <Label htmlFor="email" className="text-sm text-[#8C7A6E]">이메일</Label>
+            <Label htmlFor="email" className="text-sm text-[#7E6E62]">이메일</Label>
             <Input
               id="email"
               type="email"
               placeholder="hello@example.com"
               {...register('email')}
-              className="bg-white border-[#E8D8DC] focus:border-[#B8122A] focus:ring-[#B8122A]/20"
+              className="bg-white border-[#D8D0C8] focus:border-[#C41E2A] focus:ring-[#C41E2A]/20"
               aria-describedby={errors.email ? 'email-error' : undefined}
             />
             {errors.email && (
@@ -138,19 +138,19 @@ export default function AuthForm({ mode }: { mode: 'login' | 'signup' }) {
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="password" className="text-sm text-[#8C7A6E]">비밀번호</Label>
+            <Label htmlFor="password" className="text-sm text-[#7E6E62]">비밀번호</Label>
             <div className="relative">
               <Input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 placeholder="6자 이상"
                 {...register('password')}
-                className="bg-white border-[#E8D8DC] focus:border-[#B8122A] focus:ring-[#B8122A]/20 pr-10"
+                className="bg-white border-[#D8D0C8] focus:border-[#C41E2A] focus:ring-[#C41E2A]/20 pr-10"
                 aria-describedby={errors.password ? 'password-error' : undefined}
               />
               <button
                 type="button"
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#8C7A6E] hover:text-[#B8122A] transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#7E6E62] hover:text-[#C41E2A] transition-colors"
                 onClick={() => setShowPassword((v) => !v)}
                 aria-label={showPassword ? '비밀번호 숨기기' : '비밀번호 표시'}
               >
@@ -164,13 +164,13 @@ export default function AuthForm({ mode }: { mode: 'login' | 'signup' }) {
 
           {isSignup && (
             <div className="space-y-1.5">
-              <Label htmlFor="confirmPassword" className="text-sm text-[#8C7A6E]">비밀번호 확인</Label>
+              <Label htmlFor="confirmPassword" className="text-sm text-[#7E6E62]">비밀번호 확인</Label>
               <Input
                 id="confirmPassword"
                 type="password"
                 placeholder="비밀번호 재입력"
                 {...register('confirmPassword')}
-                className="bg-white border-[#E8D8DC] focus:border-[#B8122A] focus:ring-[#B8122A]/20"
+                className="bg-white border-[#D8D0C8] focus:border-[#C41E2A] focus:ring-[#C41E2A]/20"
                 aria-describedby={errors.confirmPassword ? 'confirm-error' : undefined}
               />
               {errors.confirmPassword && (
@@ -182,25 +182,25 @@ export default function AuthForm({ mode }: { mode: 'login' | 'signup' }) {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3 bg-[#B8122A] text-white text-sm font-medium rounded-full hover:bg-[#8C0A1E] disabled:opacity-60 disabled:cursor-not-allowed transition-colors duration-200 flex items-center justify-center gap-2"
+            className="w-full py-3 bg-[#C41E2A] text-white text-sm font-medium rounded-full hover:bg-[#9A1020] disabled:opacity-60 disabled:cursor-not-allowed transition-colors duration-200 flex items-center justify-center gap-2"
           >
             {isLoading && <Loader2 size={15} className="animate-spin" aria-hidden />}
             {isSignup ? '회원가입' : '로그인'}
           </button>
         </form>
 
-        <p className="text-center text-sm text-[#8C7A6E] mt-6">
+        <p className="text-center text-sm text-[#7E6E62] mt-6">
           {isSignup ? (
             <>
               이미 계정이 있으신가요?{' '}
-              <Link href="/login" className="text-[#B8122A] hover:text-[#8C0A1E] font-medium transition-colors">
+              <Link href="/login" className="text-[#C41E2A] hover:text-[#9A1020] font-medium transition-colors">
                 로그인
               </Link>
             </>
           ) : (
             <>
               아직 계정이 없으신가요?{' '}
-              <Link href="/signup" className="text-[#B8122A] hover:text-[#8C0A1E] font-medium transition-colors">
+              <Link href="/signup" className="text-[#C41E2A] hover:text-[#9A1020] font-medium transition-colors">
                 회원가입
               </Link>
             </>

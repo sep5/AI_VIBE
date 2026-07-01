@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 
 const SOCIAL_LINKS = [
   { href: '#', label: 'Instagram', icon: 'IG' },
@@ -8,20 +8,20 @@ const SOCIAL_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#FDF4F6] border-t border-[#E8D8DC] mt-auto">
+    <footer className="bg-[#F7F3ED] border-t border-[#D8D0C8] mt-auto">
       <div className="section-container py-10 md:py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-6">
           {/* Left — Logo */}
           <div>
-            <Link href="/" className="text-editorial text-xl font-bold text-[#B8122A]">
+            <Link href="/" className="text-editorial text-xl font-bold text-[#C41E2A]">
               My Community
             </Link>
-            <p className="mt-1 text-xs text-[#8C7A6E]">조용한 숲속의 갤러리</p>
+            <p className="mt-1 text-xs text-[#7E6E62]">조용한 숲속의 갤러리</p>
           </div>
 
           {/* Center — Copyright */}
           <div className="text-center">
-            <p className="text-sm text-[#8C7A6E]">
+            <p className="text-sm text-[#7E6E62]">
               © {new Date().getFullYear()} My Community. All rights reserved.
             </p>
           </div>
@@ -33,7 +33,7 @@ export default function Footer() {
                 key={label}
                 href={href}
                 aria-label={label}
-                className="w-8 h-8 flex items-center justify-center text-xs font-bold text-[#8C7A6E] border border-[#E8D8DC] rounded-full hover:border-[#B8122A] hover:text-[#B8122A] transition-colors duration-200"
+                className="w-8 h-8 flex items-center justify-center text-xs font-bold text-[#7E6E62] border border-[#D8D0C8] rounded-full hover:border-[#C41E2A] hover:text-[#C41E2A] transition-colors duration-200"
               >
                 {icon}
               </a>

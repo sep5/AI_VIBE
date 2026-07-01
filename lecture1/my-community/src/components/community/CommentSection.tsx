@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -86,8 +86,8 @@ export default function CommentSection({ postId }: { postId: string }) {
 
   return (
     <section aria-label="댓글">
-      <h2 className="text-editorial text-xl font-semibold text-[#B8122A] mb-6">
-        댓글 {comments.length > 0 && <span className="text-base text-[#8C7A6E]">({comments.length})</span>}
+      <h2 className="text-editorial text-xl font-semibold text-[#C41E2A] mb-6">
+        댓글 {comments.length > 0 && <span className="text-base text-[#7E6E62]">({comments.length})</span>}
       </h2>
 
       {/* Comment Input */}
@@ -97,7 +97,7 @@ export default function CommentSection({ postId }: { postId: string }) {
           onChange={(e) => setText(e.target.value)}
           placeholder="댓글을 입력해주세요..."
           rows={2}
-          className="resize-none bg-white border-[#E8D8DC] focus:border-[#B8122A] text-sm"
+          className="resize-none bg-white border-[#D8D0C8] focus:border-[#C41E2A] text-sm"
           onKeyDown={(e) => {
             if (e.key === 'Enter' && !e.shiftKey && text.trim()) {
               e.preventDefault();
@@ -108,7 +108,7 @@ export default function CommentSection({ postId }: { postId: string }) {
         <button
           onClick={() => text.trim() && addMutation.mutate(text.trim())}
           disabled={!text.trim() || addMutation.isPending}
-          className="px-4 py-2 bg-[#B8122A] text-white rounded-xl disabled:opacity-50 hover:bg-[#8C0A1E] transition-colors self-end"
+          className="px-4 py-2 bg-[#C41E2A] text-white rounded-xl disabled:opacity-50 hover:bg-[#9A1020] transition-colors self-end"
           aria-label="댓글 등록"
         >
           {addMutation.isPending ? <Loader2 size={15} className="animate-spin" /> : <Send size={15} />}
@@ -118,10 +118,10 @@ export default function CommentSection({ postId }: { postId: string }) {
       {/* Comment List */}
       {isLoading ? (
         <div className="flex justify-center py-8">
-          <Loader2 size={20} className="animate-spin text-[#8C7A6E]" />
+          <Loader2 size={20} className="animate-spin text-[#7E6E62]" />
         </div>
       ) : comments.length === 0 ? (
-        <div className="text-center py-10 text-[#8C7A6E] text-sm">
+        <div className="text-center py-10 text-[#7E6E62] text-sm">
           첫 번째 댓글을 남겨보세요.
         </div>
       ) : (
@@ -136,30 +136,30 @@ export default function CommentSection({ postId }: { postId: string }) {
                 transition={{ duration: 0.2 }}
                 className="flex gap-3"
               >
-                <Avatar className="w-8 h-8 border border-[#E8D8DC] flex-shrink-0">
+                <Avatar className="w-8 h-8 border border-[#D8D0C8] flex-shrink-0">
                   <AvatarImage src={comment.author?.avatar ?? ''} alt={comment.author?.nickname ?? ''} />
-                  <AvatarFallback className="bg-[#E8DFC8] text-[#B8122A] text-xs">
+                  <AvatarFallback className="bg-[#E4DDD0] text-[#C41E2A] text-xs">
                     {comment.author?.nickname?.[0]?.toUpperCase() ?? 'U'}
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-sm font-medium text-foreground">{comment.author?.nickname ?? '익명'}</span>
-                    <time dateTime={comment.created_at} className="text-xs text-[#8C7A6E]">
+                    <time dateTime={comment.created_at} className="text-xs text-[#7E6E62]">
                       {new Date(comment.created_at).toLocaleDateString('ko-KR')}
                     </time>
                     {currentUserId === comment.user_id && (
                       <div className="ml-auto flex items-center gap-1">
                         <button
                           onClick={() => { setEditingId(comment.id); setEditText(comment.comment); }}
-                          className="p-1 text-[#8C7A6E] hover:text-[#B8122A] transition-colors"
+                          className="p-1 text-[#7E6E62] hover:text-[#C41E2A] transition-colors"
                           aria-label="댓글 수정"
                         >
                           <Pencil size={12} />
                         </button>
                         <button
                           onClick={() => deleteMutation.mutate(comment.id)}
-                          className="p-1 text-[#8C7A6E] hover:text-red-500 transition-colors"
+                          className="p-1 text-[#7E6E62] hover:text-red-500 transition-colors"
                           aria-label="댓글 삭제"
                         >
                           <Trash2 size={12} />
@@ -173,18 +173,18 @@ export default function CommentSection({ postId }: { postId: string }) {
                         value={editText}
                         onChange={(e) => setEditText(e.target.value)}
                         rows={2}
-                        className="resize-none text-sm bg-white border-[#E8D8DC] focus:border-[#B8122A]"
+                        className="resize-none text-sm bg-white border-[#D8D0C8] focus:border-[#C41E2A]"
                       />
                       <div className="flex flex-col gap-1">
                         <button
                           onClick={() => updateMutation.mutate({ id: comment.id, comment: editText })}
-                          className="px-3 py-1 text-xs bg-[#B8122A] text-white rounded-lg hover:bg-[#8C0A1E] transition-colors"
+                          className="px-3 py-1 text-xs bg-[#C41E2A] text-white rounded-lg hover:bg-[#9A1020] transition-colors"
                         >
                           저장
                         </button>
                         <button
                           onClick={() => setEditingId(null)}
-                          className="px-3 py-1 text-xs border border-[#E8D8DC] text-[#8C7A6E] rounded-lg hover:border-[#B8122A] transition-colors"
+                          className="px-3 py-1 text-xs border border-[#D8D0C8] text-[#7E6E62] rounded-lg hover:border-[#C41E2A] transition-colors"
                         >
                           취소
                         </button>

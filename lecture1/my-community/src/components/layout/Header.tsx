@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -75,7 +75,7 @@ export default function Header() {
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
           scrolled
-            ? 'bg-[#FAE8EC]/95 backdrop-blur-md shadow-sm border-b border-[#E8D8DC]'
+            ? 'bg-[#EEE8DF]/95 backdrop-blur-md shadow-sm border-b border-[#D8D0C8]'
             : 'bg-transparent'
         )}
         initial={{ y: -80 }}
@@ -86,7 +86,7 @@ export default function Header() {
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group">
-              <span className="text-editorial text-xl md:text-2xl font-bold text-[#B8122A] tracking-tight group-hover:opacity-80 transition-opacity">
+              <span className="text-editorial text-xl md:text-2xl font-bold text-[#C41E2A] tracking-tight group-hover:opacity-80 transition-opacity">
                 My Community
               </span>
             </Link>
@@ -100,8 +100,8 @@ export default function Header() {
                   className={cn(
                     'text-sm font-medium tracking-wide transition-colors duration-200',
                     pathname === href
-                      ? 'text-[#B8122A]'
-                      : 'text-foreground/70 hover:text-[#B8122A]'
+                      ? 'text-[#C41E2A]'
+                      : 'text-foreground/70 hover:text-[#C41E2A]'
                   )}
                 >
                   {label}
@@ -113,14 +113,14 @@ export default function Header() {
             <div className="hidden md:flex items-center gap-3">
               <button
                 aria-label="검색"
-                className="p-2 rounded-full text-foreground/60 hover:text-[#B8122A] hover:bg-[#B8122A]/10 transition-colors"
+                className="p-2 rounded-full text-foreground/60 hover:text-[#C41E2A] hover:bg-[#C41E2A]/10 transition-colors"
                 onClick={() => router.push('/community')}
               >
                 <Search size={18} />
               </button>
               <button
                 aria-label="알림"
-                className="p-2 rounded-full text-foreground/60 hover:text-[#B8122A] hover:bg-[#B8122A]/10 transition-colors"
+                className="p-2 rounded-full text-foreground/60 hover:text-[#C41E2A] hover:bg-[#C41E2A]/10 transition-colors"
               >
                 <Bell size={18} />
               </button>
@@ -128,17 +128,17 @@ export default function Header() {
               {user ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger
-                    className="rounded-full focus-visible:outline-2 focus-visible:outline-[#B8122A]"
+                    className="rounded-full focus-visible:outline-2 focus-visible:outline-[#C41E2A]"
                     aria-label="프로필 메뉴"
                   >
-                    <Avatar className="w-9 h-9 border-2 border-[#E8D8DC] hover:border-[#B8122A] transition-colors">
+                    <Avatar className="w-9 h-9 border-2 border-[#D8D0C8] hover:border-[#C41E2A] transition-colors">
                       <AvatarImage src={user.avatar} alt={user.nickname ?? '프로필'} />
-                      <AvatarFallback className="bg-[#E8DFC8] text-[#B8122A] text-sm font-medium">
+                      <AvatarFallback className="bg-[#E4DDD0] text-[#C41E2A] text-sm font-medium">
                         {user.nickname?.[0]?.toUpperCase() ?? 'U'}
                       </AvatarFallback>
                     </Avatar>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-48 bg-[#FDF4F6] border-[#E8D8DC]">
+                  <DropdownMenuContent align="end" className="w-48 bg-[#F7F3ED] border-[#D8D0C8]">
                     <DropdownMenuItem onClick={() => router.push('/profile')} className="flex items-center gap-2 cursor-pointer">
                       <User size={14} />
                       마이페이지
@@ -146,7 +146,7 @@ export default function Header() {
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
                       onClick={handleLogout}
-                      className="text-[#B8122A] flex items-center gap-2 cursor-pointer"
+                      className="text-[#C41E2A] flex items-center gap-2 cursor-pointer"
                     >
                       <LogOut size={14} />
                       로그아웃
@@ -156,7 +156,7 @@ export default function Header() {
               ) : (
                 <Link
                   href="/login"
-                  className="px-4 py-2 text-sm font-medium bg-[#B8122A] text-white rounded-full hover:bg-[#8C0A1E] transition-colors duration-200"
+                  className="px-4 py-2 text-sm font-medium bg-[#C41E2A] text-white rounded-full hover:bg-[#9A1020] transition-colors duration-200"
                 >
                   로그인
                 </Link>
@@ -165,7 +165,7 @@ export default function Header() {
 
             {/* Mobile Menu Toggle */}
             <button
-              className="md:hidden p-2 text-foreground/60 hover:text-[#B8122A] transition-colors"
+              className="md:hidden p-2 text-foreground/60 hover:text-[#C41E2A] transition-colors"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label={mobileOpen ? '메뉴 닫기' : '메뉴 열기'}
               aria-expanded={mobileOpen}
@@ -190,7 +190,7 @@ export default function Header() {
               onClick={() => setMobileOpen(false)}
             />
             <motion.nav
-              className="absolute top-16 left-0 right-0 bg-[#FAE8EC] border-b border-[#E8D8DC] py-6 px-6"
+              className="absolute top-16 left-0 right-0 bg-[#EEE8DF] border-b border-[#D8D0C8] py-6 px-6"
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -20, opacity: 0 }}
@@ -201,7 +201,7 @@ export default function Header() {
                 <Link
                   key={label}
                   href={href}
-                  className="block py-3 text-base font-medium text-foreground/70 hover:text-[#B8122A] transition-colors border-b border-[#E8D8DC] last:border-0"
+                  className="block py-3 text-base font-medium text-foreground/70 hover:text-[#C41E2A] transition-colors border-b border-[#D8D0C8] last:border-0"
                   onClick={() => setMobileOpen(false)}
                 >
                   {label}
@@ -211,14 +211,14 @@ export default function Header() {
                 {user ? (
                   <button
                     onClick={() => { handleLogout(); setMobileOpen(false); }}
-                    className="w-full py-2 text-sm font-medium text-[#B8122A] border border-[#B8122A] rounded-full hover:bg-[#B8122A] hover:text-white transition-colors"
+                    className="w-full py-2 text-sm font-medium text-[#C41E2A] border border-[#C41E2A] rounded-full hover:bg-[#C41E2A] hover:text-white transition-colors"
                   >
                     로그아웃
                   </button>
                 ) : (
                   <Link
                     href="/login"
-                    className="block w-full py-2 text-center text-sm font-medium bg-[#B8122A] text-white rounded-full hover:bg-[#8C0A1E] transition-colors"
+                    className="block w-full py-2 text-center text-sm font-medium bg-[#C41E2A] text-white rounded-full hover:bg-[#9A1020] transition-colors"
                     onClick={() => setMobileOpen(false)}
                   >
                     로그인

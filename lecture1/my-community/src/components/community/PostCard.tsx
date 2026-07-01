@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -31,11 +31,11 @@ export default function PostCard({ post, index = 0 }: { post: Post; index?: numb
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.08, ease: 'easeOut' }}
-      className="group bg-[#FDF4F6] border border-[#E8D8DC] rounded-2xl overflow-hidden card-hover"
+      className="group bg-[#F7F3ED] border border-[#D8D0C8] rounded-2xl overflow-hidden card-hover"
     >
       <Link href={`/post?id=${post.id}`} aria-label={`게시글: ${post.title}`}>
         {/* Thumbnail */}
-        <div className="relative overflow-hidden bg-[#E8DFC8]" style={{ aspectRatio: '4/3' }}>
+        <div className="relative overflow-hidden bg-[#E4DDD0]" style={{ aspectRatio: '4/3' }}>
           {post.thumbnail ? (
             <Image
               src={post.thumbnail}
@@ -45,7 +45,7 @@ export default function PostCard({ post, index = 0 }: { post: Post; index?: numb
               className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-[#8C7A6E]">
+            <div className="w-full h-full flex items-center justify-center text-[#7E6E62]">
               <div className="text-center">
                 <span className="text-4xl">🌿</span>
                 <p className="text-xs mt-2 tracking-wide">No Image</p>
@@ -53,7 +53,7 @@ export default function PostCard({ post, index = 0 }: { post: Post; index?: numb
             </div>
           )}
           {/* Hover overlay */}
-          <div className="absolute inset-0 bg-[#B8122A]/0 group-hover:bg-[#B8122A]/5 transition-colors duration-300" />
+          <div className="absolute inset-0 bg-[#C41E2A]/0 group-hover:bg-[#C41E2A]/5 transition-colors duration-300" />
         </div>
       </Link>
 
@@ -61,24 +61,24 @@ export default function PostCard({ post, index = 0 }: { post: Post; index?: numb
       <div className="p-4 md:p-5">
         {/* Author */}
         <div className="flex items-center gap-2 mb-3">
-          <Avatar className="w-7 h-7 border border-[#E8D8DC]">
+          <Avatar className="w-7 h-7 border border-[#D8D0C8]">
             <AvatarImage src={post.author?.avatar ?? ''} alt={post.author?.nickname ?? '작성자'} />
-            <AvatarFallback className="bg-[#E8DFC8] text-[#B8122A] text-xs">
+            <AvatarFallback className="bg-[#E4DDD0] text-[#C41E2A] text-xs">
               {post.author?.nickname?.[0]?.toUpperCase() ?? 'U'}
             </AvatarFallback>
           </Avatar>
-          <span className="text-xs text-[#8C7A6E] font-medium">
+          <span className="text-xs text-[#7E6E62] font-medium">
             {post.author?.nickname ?? '익명'}
           </span>
-          <span className="text-[#E8D8DC] text-xs">·</span>
-          <time dateTime={post.created_at} className="text-xs text-[#8C7A6E]">
+          <span className="text-[#D8D0C8] text-xs">·</span>
+          <time dateTime={post.created_at} className="text-xs text-[#7E6E62]">
             {formattedDate}
           </time>
         </div>
 
         {/* Title */}
         <Link href={`/post?id=${post.id}`}>
-          <h2 className="text-editorial text-base md:text-lg font-semibold text-foreground leading-snug hover:text-[#B8122A] transition-colors line-clamp-2 mb-3">
+          <h2 className="text-editorial text-base md:text-lg font-semibold text-foreground leading-snug hover:text-[#C41E2A] transition-colors line-clamp-2 mb-3">
             {post.title}
           </h2>
         </Link>
@@ -90,7 +90,7 @@ export default function PostCard({ post, index = 0 }: { post: Post; index?: numb
             initialCount={post.likes_count ?? 0}
             initialLiked={post.is_liked ?? false}
           />
-          <div className="flex items-center gap-1 text-[#8C7A6E] text-xs">
+          <div className="flex items-center gap-1 text-[#7E6E62] text-xs">
             <MessageCircle size={13} aria-hidden />
             <span>{post.comments_count ?? 0}</span>
           </div>

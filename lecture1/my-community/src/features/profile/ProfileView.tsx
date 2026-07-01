@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -112,16 +112,16 @@ export default function ProfileView({ user }: { user: User | null }) {
     <div>
       {/* Profile Header */}
       <motion.div
-        className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12 pb-10 border-b border-[#E8D8DC]"
+        className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12 pb-10 border-b border-[#D8D0C8]"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
         {/* Avatar */}
         <div className="relative group">
-          <Avatar className="w-20 h-20 border-2 border-[#E8D8DC]">
+          <Avatar className="w-20 h-20 border-2 border-[#D8D0C8]">
             <AvatarImage src={displayAvatar} alt={user?.nickname ?? '프로필'} />
-            <AvatarFallback className="bg-[#E8DFC8] text-[#B8122A] text-2xl font-medium">
+            <AvatarFallback className="bg-[#E4DDD0] text-[#C41E2A] text-2xl font-medium">
               {user?.nickname?.[0]?.toUpperCase() ?? 'U'}
             </AvatarFallback>
           </Avatar>
@@ -157,22 +157,22 @@ export default function ProfileView({ user }: { user: User | null }) {
                 value={nickname}
                 onChange={(e) => setNickname(e.target.value)}
                 placeholder="닉네임"
-                className="bg-white border-[#E8D8DC] focus:border-[#B8122A] max-w-xs"
+                className="bg-white border-[#D8D0C8] focus:border-[#C41E2A] max-w-xs"
               />
               <Textarea
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 placeholder="자기소개를 입력해주세요"
                 rows={2}
-                className="resize-none bg-white border-[#E8D8DC] focus:border-[#B8122A] text-sm max-w-xs"
+                className="resize-none bg-white border-[#D8D0C8] focus:border-[#C41E2A] text-sm max-w-xs"
               />
             </div>
           ) : (
             <div>
-              <h1 className="text-editorial text-2xl font-bold text-[#B8122A] mb-1">
+              <h1 className="text-editorial text-2xl font-bold text-[#C41E2A] mb-1">
                 {user?.nickname ?? '닉네임 없음'}
               </h1>
-              <p className="text-sm text-[#8C7A6E] leading-relaxed">
+              <p className="text-sm text-[#7E6E62] leading-relaxed">
                 {user?.bio ?? '소개글이 없습니다.'}
               </p>
             </div>
@@ -186,14 +186,14 @@ export default function ProfileView({ user }: { user: User | null }) {
               <button
                 onClick={() => updateMutation.mutate()}
                 disabled={updateMutation.isPending}
-                className="flex items-center gap-1.5 px-4 py-2 bg-[#B8122A] text-white text-sm rounded-full hover:bg-[#8C0A1E] disabled:opacity-60 transition-colors"
+                className="flex items-center gap-1.5 px-4 py-2 bg-[#C41E2A] text-white text-sm rounded-full hover:bg-[#9A1020] disabled:opacity-60 transition-colors"
               >
                 {updateMutation.isPending ? <Loader2 size={13} className="animate-spin" /> : <Check size={13} />}
                 저장
               </button>
               <button
                 onClick={() => { setIsEditing(false); setNickname(user?.nickname ?? ''); setBio(user?.bio ?? ''); setAvatarPreview(null); }}
-                className="flex items-center gap-1.5 px-4 py-2 border border-[#E8D8DC] text-[#8C7A6E] text-sm rounded-full hover:border-[#B8122A] transition-colors"
+                className="flex items-center gap-1.5 px-4 py-2 border border-[#D8D0C8] text-[#7E6E62] text-sm rounded-full hover:border-[#C41E2A] transition-colors"
               >
                 <X size={13} />
                 취소
@@ -202,7 +202,7 @@ export default function ProfileView({ user }: { user: User | null }) {
           ) : (
             <button
               onClick={() => setIsEditing(true)}
-              className="flex items-center gap-1.5 px-4 py-2 border border-[#E8D8DC] text-[#8C7A6E] text-sm rounded-full hover:border-[#B8122A] hover:text-[#B8122A] transition-colors"
+              className="flex items-center gap-1.5 px-4 py-2 border border-[#D8D0C8] text-[#7E6E62] text-sm rounded-full hover:border-[#C41E2A] hover:text-[#C41E2A] transition-colors"
             >
               <Pencil size={13} />
               수정
@@ -213,11 +213,11 @@ export default function ProfileView({ user }: { user: User | null }) {
 
       {/* Tabs */}
       <Tabs defaultValue="my-posts">
-        <TabsList className="bg-[#E8DFC8] mb-8">
-          <TabsTrigger value="my-posts" className="data-[state=active]:bg-[#B8122A] data-[state=active]:text-white text-sm">
+        <TabsList className="bg-[#E4DDD0] mb-8">
+          <TabsTrigger value="my-posts" className="data-[state=active]:bg-[#C41E2A] data-[state=active]:text-white text-sm">
             작성한 글 ({myPosts.length})
           </TabsTrigger>
-          <TabsTrigger value="liked-posts" className="data-[state=active]:bg-[#B8122A] data-[state=active]:text-white text-sm">
+          <TabsTrigger value="liked-posts" className="data-[state=active]:bg-[#C41E2A] data-[state=active]:text-white text-sm">
             좋아요한 글 ({likedPosts.length})
           </TabsTrigger>
         </TabsList>

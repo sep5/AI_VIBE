@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -65,9 +65,9 @@ function PostDetailContent() {
     return (
       <MainLayout>
         <div className="section-container py-16 max-w-3xl mx-auto animate-pulse">
-          <div className="h-64 bg-[#E8DFC8] rounded-2xl mb-8" />
-          <div className="h-10 bg-[#E8DFC8] rounded-full w-3/4 mb-4" />
-          <div className="h-4 bg-[#E8DFC8] rounded-full w-1/2" />
+          <div className="h-64 bg-[#E4DDD0] rounded-2xl mb-8" />
+          <div className="h-10 bg-[#E4DDD0] rounded-full w-3/4 mb-4" />
+          <div className="h-4 bg-[#E4DDD0] rounded-full w-1/2" />
         </div>
       </MainLayout>
     );
@@ -83,28 +83,28 @@ function PostDetailContent() {
   return (
     <MainLayout>
       <article className="section-container py-12 md:py-16 max-w-3xl mx-auto">
-        <Link href="/community" className="text-xs text-[#8C7A6E] hover:text-[#B8122A] transition-colors mb-8 inline-block">
+        <Link href="/community" className="text-xs text-[#7E6E62] hover:text-[#C41E2A] transition-colors mb-8 inline-block">
           ← 커뮤니티로 돌아가기
         </Link>
 
         {post.thumbnail && (
-          <div className="relative w-full rounded-2xl overflow-hidden mb-10 bg-[#E8DFC8]" style={{ aspectRatio: '16/9' }}>
+          <div className="relative w-full rounded-2xl overflow-hidden mb-10 bg-[#E4DDD0]" style={{ aspectRatio: '16/9' }}>
             <Image src={post.thumbnail} alt={post.title} fill className="object-cover" priority sizes="(max-width: 768px) 100vw, 800px" />
           </div>
         )}
 
-        <h1 className="text-editorial text-3xl md:text-4xl lg:text-5xl font-bold text-[#B8122A] leading-tight mb-6">{post.title}</h1>
+        <h1 className="text-editorial text-3xl md:text-4xl lg:text-5xl font-bold text-[#C41E2A] leading-tight mb-6">{post.title}</h1>
 
-        <div className="flex items-center gap-3 pb-6 border-b border-[#E8D8DC] mb-8">
-          <Avatar className="w-10 h-10 border-2 border-[#E8D8DC]">
+        <div className="flex items-center gap-3 pb-6 border-b border-[#D8D0C8] mb-8">
+          <Avatar className="w-10 h-10 border-2 border-[#D8D0C8]">
             <AvatarImage src={post.author?.avatar ?? ''} alt={post.author?.nickname ?? ''} />
-            <AvatarFallback className="bg-[#E8DFC8] text-[#B8122A] text-sm font-medium">
+            <AvatarFallback className="bg-[#E4DDD0] text-[#C41E2A] text-sm font-medium">
               {post.author?.nickname?.[0]?.toUpperCase() ?? 'U'}
             </AvatarFallback>
           </Avatar>
           <div>
             <p className="text-sm font-medium">{post.author?.nickname ?? '익명'}</p>
-            <time dateTime={post.created_at} className="text-xs text-[#8C7A6E]">{formattedDate}</time>
+            <time dateTime={post.created_at} className="text-xs text-[#7E6E62]">{formattedDate}</time>
           </div>
         </div>
 
@@ -113,17 +113,17 @@ function PostDetailContent() {
         {sortedImages.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
             {sortedImages.map((img) => (
-              <div key={img.id} className="relative rounded-xl overflow-hidden bg-[#E8DFC8]" style={{ aspectRatio: '4/3' }}>
+              <div key={img.id} className="relative rounded-xl overflow-hidden bg-[#E4DDD0]" style={{ aspectRatio: '4/3' }}>
                 <Image src={img.image_url} alt="게시글 이미지" fill className="object-cover" sizes="(max-width: 640px) 100vw, 400px" />
               </div>
             ))}
           </div>
         )}
 
-        <div className="flex justify-center py-8 border-t border-b border-[#E8D8DC] mb-10">
+        <div className="flex justify-center py-8 border-t border-b border-[#D8D0C8] mb-10">
           <div className="flex flex-col items-center gap-2">
             <LikeButton postId={id} initialCount={likesCount} initialLiked={isLiked} />
-            <p className="text-xs text-[#8C7A6E]">좋아요를 눌러 응원해주세요</p>
+            <p className="text-xs text-[#7E6E62]">좋아요를 눌러 응원해주세요</p>
           </div>
         </div>
 
@@ -135,7 +135,7 @@ function PostDetailContent() {
 
 export default function PostPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#FAE8EC]" />}>
+    <Suspense fallback={<div className="min-h-screen bg-[#EEE8DF]" />}>
       <PostDetailContent />
     </Suspense>
   );

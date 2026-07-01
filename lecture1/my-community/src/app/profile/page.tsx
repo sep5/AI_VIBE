@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -29,11 +29,11 @@ export default function ProfilePage() {
     return (
       <MainLayout>
         <div className="section-container py-16 animate-pulse">
-          <div className="flex gap-6 mb-12 pb-10 border-b border-[#E8D8DC]">
-            <div className="w-20 h-20 rounded-full bg-[#E8DFC8]" />
+          <div className="flex gap-6 mb-12 pb-10 border-b border-[#D8D0C8]">
+            <div className="w-20 h-20 rounded-full bg-[#E4DDD0]" />
             <div className="flex-1 space-y-3 pt-2">
-              <div className="h-6 bg-[#E8DFC8] rounded-full w-32" />
-              <div className="h-4 bg-[#E8DFC8] rounded-full w-48" />
+              <div className="h-6 bg-[#E4DDD0] rounded-full w-32" />
+              <div className="h-4 bg-[#E4DDD0] rounded-full w-48" />
             </div>
           </div>
         </div>

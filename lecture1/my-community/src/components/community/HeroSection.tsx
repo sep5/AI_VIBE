@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -19,15 +19,15 @@ function fadeUpVariant(delay = 0) {
 export default function HeroSection() {
   return (
     <section
-      className="relative min-h-[60vh] md:min-h-[70vh] flex items-center overflow-hidden bg-[#FAE8EC]"
+      className="relative min-h-[60vh] md:min-h-[70vh] flex items-center overflow-hidden bg-[#EEE8DF]"
       aria-label="히어로 섹션"
     >
       {/* Background texture */}
       <div
         className="absolute inset-0 opacity-30"
         style={{
-          backgroundImage: `radial-gradient(circle at 20% 80%, #B8122A15 0%, transparent 50%),
-                            radial-gradient(circle at 80% 20%, #4A7A3015 0%, transparent 50%)`,
+          backgroundImage: `radial-gradient(circle at 20% 80%, #C41E2A15 0%, transparent 50%),
+                            radial-gradient(circle at 80% 20%, #4A78A015 0%, transparent 50%)`,
         }}
       />
 
@@ -36,7 +36,7 @@ export default function HeroSection() {
           {/* Left — Text */}
           <div>
             <motion.p
-              className="text-xs tracking-[0.25em] uppercase text-[#8C7A6E] mb-4"
+              className="text-xs tracking-[0.25em] uppercase text-[#7E6E62] mb-4"
               variants={fadeUpVariant(0)}
               initial="hidden"
               animate="visible"
@@ -44,7 +44,7 @@ export default function HeroSection() {
               Welcome to My Community
             </motion.p>
             <motion.h1
-              className="text-editorial text-5xl md:text-6xl lg:text-7xl font-bold text-[#B8122A] leading-[1.1] mb-6"
+              className="text-editorial text-5xl md:text-6xl lg:text-7xl font-bold text-[#C41E2A] leading-[1.1] mb-6"
               variants={fadeUpVariant(0.15)}
               initial="hidden"
               animate="visible"
@@ -73,14 +73,14 @@ export default function HeroSection() {
             >
               <Link
                 href="/community"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#B8122A] text-white text-sm font-medium rounded-full hover:bg-[#8C0A1E] transition-colors duration-200 group"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[#C41E2A] text-white text-sm font-medium rounded-full hover:bg-[#9A1020] transition-colors duration-200 group"
               >
                 커뮤니티 보기
                 <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
               </Link>
               <Link
                 href="/login"
-                className="inline-flex items-center gap-2 px-6 py-3 border border-[#B8122A] text-[#B8122A] text-sm font-medium rounded-full hover:bg-[#B8122A] hover:text-white transition-colors duration-200"
+                className="inline-flex items-center gap-2 px-6 py-3 border border-[#C41E2A] text-[#C41E2A] text-sm font-medium rounded-full hover:bg-[#C41E2A] hover:text-white transition-colors duration-200"
               >
                 글 작성하기
               </Link>
@@ -96,9 +96,9 @@ export default function HeroSection() {
           >
             <div className="relative aspect-[4/5] max-w-md ml-auto">
               {/* Main large image placeholder */}
-              <div className="absolute inset-0 rounded-2xl overflow-hidden bg-[#E8DFC8] img-zoom">
+              <div className="absolute inset-0 rounded-2xl overflow-hidden bg-[#E4DDD0] img-zoom">
                 <div className="w-full h-full flex items-center justify-center">
-                  <div className="text-center text-[#8C7A6E]">
+                  <div className="text-center text-[#7E6E62]">
                     <div className="text-6xl mb-3">🌿</div>
                     <p className="text-sm tracking-wide">Gallery Image</p>
                   </div>
@@ -107,27 +107,27 @@ export default function HeroSection() {
 
               {/* Overlay card */}
               <motion.div
-                className="absolute -bottom-6 -left-6 bg-[#FDF4F6] border border-[#E8D8DC] rounded-xl p-4 shadow-lg"
+                className="absolute -bottom-6 -left-6 bg-[#F7F3ED] border border-[#D8D0C8] rounded-xl p-4 shadow-lg"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
               >
-                <p className="text-xs text-[#8C7A6E] mb-1">오늘의 포스트</p>
-                <p className="text-sm font-medium text-[#B8122A] text-editorial">
+                <p className="text-xs text-[#7E6E62] mb-1">오늘의 포스트</p>
+                <p className="text-sm font-medium text-[#C41E2A] text-editorial">
                   숲속 산책의 기록
                 </p>
-                <p className="text-xs text-[#8C7A6E] mt-1">❤ 128 · 💬 24</p>
+                <p className="text-xs text-[#7E6E62] mt-1">❤ 128 · 💬 24</p>
               </motion.div>
 
               {/* Accent dot */}
-              <div className="absolute -top-3 -right-3 w-6 h-6 rounded-full bg-[#4A7A30]" />
+              <div className="absolute -top-3 -right-3 w-6 h-6 rounded-full bg-[#4A78A0]" />
             </div>
           </motion.div>
         </div>
       </div>
 
       {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#FAE8EC] to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#EEE8DF] to-transparent" />
     </section>
   );
 }

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useQuery } from '@tanstack/react-query';
 import { Plus } from 'lucide-react';
@@ -56,7 +56,7 @@ export default function CommunityFeed({ sort = 'latest' }: { sort?: string }) {
       <div className="flex justify-end mb-6">
         <Link
           href="/post/create"
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#B8122A] text-white text-sm font-medium rounded-full hover:bg-[#8C0A1E] transition-colors duration-200"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#C41E2A] text-white text-sm font-medium rounded-full hover:bg-[#9A1020] transition-colors duration-200"
         >
           <Plus size={15} aria-hidden />
           글 작성

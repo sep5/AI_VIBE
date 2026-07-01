@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -70,7 +70,7 @@ export default function LikeButton({
       aria-pressed={liked}
       className={cn(
         'flex items-center gap-1.5 text-xs transition-colors duration-200',
-        liked ? 'text-[#B8122A]' : 'text-[#8C7A6E] hover:text-[#B8122A]'
+        liked ? 'text-[#C41E2A]' : 'text-[#7E6E62] hover:text-[#C41E2A]'
       )}
     >
       <motion.span
@@ -79,7 +79,7 @@ export default function LikeButton({
       >
         <Heart
           size={13}
-          className={cn('transition-all', liked && 'fill-[#B8122A]')}
+          className={cn('transition-all', liked && 'fill-[#C41E2A]')}
           aria-hidden
         />
       </motion.span>
