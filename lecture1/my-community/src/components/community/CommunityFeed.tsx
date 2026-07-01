@@ -1,0 +1,68 @@
+'use client';
+
+import { useQuery } from '@tanstack/react-query';
+import { Plus } from 'lucide-react';
+import Link from 'next/link';
+import MasonryGrid from './MasonryGrid';
+import { supabase } from '@/lib/supabase';
+import type { Post } from '@/types';
+
+async function fetchPosts(sort = 'latest'): Promise<Post[]> {
+  let query = supabase
+    .from('posts')
+    .select(`
+      *,
+      author:users(id, nickname, avatar),
+      images:post_images(id, image_url, order),
+      likes_count:likes(count),
+      comments_count:comments(count)
+    `);
+
+  if (sort === 'popular') {
+    query = query.order('likes_count', { ascending: false });
+  } else {
+    query = query.order('created_at', { ascending: false });
+  }
+
+  const { data, error } = await query.limit(20);
+  if (error) throw error;
+
+  return (data ?? []).map((post) => ({
+    ...post,
+    likes_count: Array.isArray(post.likes_count) ? post.likes_count[0]?.count ?? 0 : 0,
+    comments_count: Array.isArray(post.comments_count) ? post.comments_count[0]?.count ?? 0 : 0,
+  }));
+}
+
+/**
+ * CommunityFeed 컴포넌트
+ * Supabase에서 게시글을 가져와 MasonryGrid로 렌더링
+ *
+ * Props:
+ * @param {string} sort - 정렬 방식 ('latest' | 'popular') [Optional, 기본값: 'latest']
+ *
+ * Example usage:
+ * <CommunityFeed sort="latest" />
+ */
+export default function CommunityFeed({ sort = 'latest' }: { sort?: string }) {
+  const { data: posts = [], isLoading } = useQuery({
+    queryKey: ['posts', sort],
+    queryFn: () => fetchPosts(sort),
+  });
+
+  return (
+    <div>
+      {/* Write Button */}
+      <div className="flex justify-end mb-6">
+        <Link
+          href="/post/create"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#B8122A] text-white text-sm font-medium rounded-full hover:bg-[#8C0A1E] transition-colors duration-200"
+        >
+          <Plus size={15} aria-hidden />
+          글 작성
+        </Link>
+      </div>
+      <MasonryGrid posts={posts} isLoading={isLoading} />
+    </div>
+  );
+}
