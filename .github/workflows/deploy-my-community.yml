@@ -14,14 +14,11 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: lecture1/my-community
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -34,24 +31,20 @@ jobs:
           cache-dependency-path: lecture1/my-community/package-lock.json
 
       - name: Install dependencies
+        working-directory: lecture1/my-community
         run: npm ci
 
       - name: Build
+        working-directory: lecture1/my-community
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
         run: npm run build
 
-      - name: Prepare site structure
-        working-directory: ${{ github.workspace }}
-        run: |
-          mkdir -p _site/lecture1/my-community
-          cp -r lecture1/my-community/out/. _site/lecture1/my-community/
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: lecture1/my-community/out
 
   deploy:
     environment:
