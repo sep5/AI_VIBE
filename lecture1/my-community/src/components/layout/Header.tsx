@@ -75,7 +75,7 @@ export default function Header() {
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
           scrolled
-            ? 'bg-[#EEE8DF]/95 backdrop-blur-md shadow-sm border-b border-[#D8D0C8]'
+            ? 'bg-[#FFF8F2]/95 backdrop-blur-md shadow-sm border-b border-[#EAD8CC]'
             : 'bg-transparent'
         )}
         initial={{ y: -80 }}
@@ -92,16 +92,16 @@ export default function Header() {
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-8" aria-label="주요 내비게이션">
+            <nav className="hidden md:flex items-center gap-1" aria-label="주요 내비게이션">
               {NAV_LINKS.map(({ href, label }) => (
                 <Link
                   key={label}
                   href={href}
                   className={cn(
-                    'text-sm font-medium tracking-wide transition-colors duration-200',
+                    'px-4 py-1.5 rounded-full text-sm font-medium tracking-wide transition-all duration-200',
                     pathname === href
-                      ? 'text-[#C41E2A]'
-                      : 'text-foreground/70 hover:text-[#C41E2A]'
+                      ? 'bg-[#C82828] text-white'
+                      : 'text-foreground/70 hover:text-[#C82828] hover:bg-[#C82828]/8'
                   )}
                 >
                   {label}

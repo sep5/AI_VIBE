@@ -37,7 +37,7 @@ export default function MasonryGrid({
   if (posts.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center">
-        <span className="text-5xl mb-4">🌿</span>
+        <span className="text-5xl mb-4">🍀</span>
         <p className="text-[#7E6E62] text-base">아직 게시글이 없습니다.</p>
         <p className="text-[#7E6E62] text-sm mt-1">첫 번째 글을 작성해보세요.</p>
       </div>

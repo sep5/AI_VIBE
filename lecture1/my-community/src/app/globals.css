@@ -29,17 +29,19 @@
   --color-ring:              var(--ring);
 
   /* Brand Colors */
-  --color-brand-crimson:       #C41E2A;   /* Vintage Deep Red */
-  --color-brand-crimson-light: #DA3050;
-  --color-brand-crimson-dark:  #9A1020;
+  --color-brand-crimson:       #C82828;   /* Vivid Red */
+  --color-brand-crimson-light: #E03A3A;
+  --color-brand-crimson-dark:  #8C2018;   /* Deep Red — Footer */
+  --color-brand-pink:          #F5A0B5;   /* Soft Pink */
+  --color-brand-blue:          #88C0D0;   /* Sky Blue */
   --color-brand-stone:         #C0B8AA;   /* Warm Stone */
   --color-brand-stone-dark:    #6A5C4A;
   --color-brand-stone-light:   #E0D8CC;
   --color-brand-beige:         #C8B898;   /* Warm Beige */
-  --color-brand-cream:         #EEE8DF;   /* Warm Cream BG */
-  --color-brand-card:          #F7F3ED;   /* Card Background */
+  --color-brand-cream:         #FFF8F2;   /* Warm Cream BG */
+  --color-brand-card:          #FFF8F2;   /* Card Background */
   --color-brand-muted:         #7E6E62;   /* Muted Text */
-  --color-brand-border:        #D8D0C8;   /* Neutral Warm Border */
+  --color-brand-border:        #EAD8CC;   /* Warm Border */
 
   /* Typography */
   --font-sans:    var(--font-inter);
@@ -70,24 +72,24 @@
    Light Mode — Vintage Editorial
 ───────────────────────────────────────────── */
 :root {
-  --background:             #EEE8DF;   /* Warm Cream — 전체 페이지 배경 */
+  --background:             #FFF8F2;   /* Warm Light Cream — 전체 페이지 배경 */
   --foreground:             #28201A;   /* Warm Dark Brown — 기본 텍스트 */
-  --card:                   #F7F3ED;   /* 카드 배경 — 따뜻한 오프화이트 */
+  --card:                   #FFFFFF;   /* 카드 배경 — 화이트 */
   --card-foreground:        #28201A;
-  --popover:                #F7F3ED;
+  --popover:                #FFFFFF;
   --popover-foreground:     #28201A;
-  --primary:                #C41E2A;   /* Vintage Deep Red — CTA, 강조 */
+  --primary:                #C82828;   /* Vivid Red — CTA, 강조 */
   --primary-foreground:     #FFFFFF;
-  --secondary:              #E4DDD0;   /* Warm Beige — 보조 배경 */
+  --secondary:              #F5EDE8;   /* Warm Light Pink — 보조 배경 */
   --secondary-foreground:   #28201A;
-  --muted:                  #E8E2DA;   /* 뮤트 영역 */
+  --muted:                  #F5EDE8;   /* 뮤트 영역 */
   --muted-foreground:       #7E6E62;   /* 캡션, 보조 텍스트 */
-  --accent:                 #C0B8AA;   /* Warm Stone — 포인트 */
+  --accent:                 #F5A0B5;   /* Soft Pink — 포인트 */
   --accent-foreground:      #28201A;
   --destructive:            #DC2626;
-  --border:                 #D8D0C8;   /* 기본 구분선 */
-  --input:                  #D8D0C8;
-  --ring:                   #C41E2A;
+  --border:                 #EAD8CC;   /* Warm Border */
+  --input:                  #EAD8CC;
+  --ring:                   #C82828;
   --radius:                 0.5rem;
 
   --sidebar:                #F7F3ED;

@@ -19,7 +19,10 @@ import LikeButton from '@/components/community/LikeButton';
  * Example usage:
  * <PostCard post={post} index={0} />
  */
+const CARD_BG_COLORS = ['#C82828', '#F5A0B5', '#88C0D0'];
+
 export default function PostCard({ post, index = 0 }: { post: Post; index?: number }) {
+  const cardBg = CARD_BG_COLORS[index % CARD_BG_COLORS.length];
   const formattedDate = new Date(post.created_at).toLocaleDateString('ko-KR', {
     year: 'numeric',
     month: 'long',
@@ -45,7 +48,7 @@ export default function PostCard({ post, index = 0 }: { post: Post; index?: numb
               className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
           ) : (
-            <div className="w-full h-full bg-[#4A7A30] flex items-center justify-center">
+            <div className="w-full h-full flex items-center justify-center" style={{ backgroundColor: cardBg }}>
               <span className="text-xs font-medium uppercase select-none" style={{ color: 'rgba(255,255,255,0.5)', letterSpacing: '0.2em' }}>
                 gallery image
               </span>
