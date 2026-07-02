@@ -1,14 +1,14 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Star, Heart, ArrowRight } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
+import type { Post } from '@/types';
 
-const SWATCHES = [
-  { color: '#C82828' },
-  { color: '#F5A0B5' },
-  { color: '#88C0D0' },
-];
+const CARD_COLORS = ['#C82828', '#F5A0B5', '#88C0D0'];
 
 const QUICK_LINKS = [
   { label: '오늘의 인기글', href: '/community?sort=popular', bg: '#F5A0B5', color: '#8C2018' },
@@ -23,66 +23,95 @@ const FEATURES = [
 ];
 
 export default function HeroSection() {
+  const [previews, setPreviews] = useState<Post[]>([]);
+
+  useEffect(() => {
+    supabase
+      .from('posts')
+      .select('id, title, thumbnail')
+      .order('created_at', { ascending: false })
+      .limit(3)
+      .then(({ data }) => {
+        if (data) setPreviews(data as Post[]);
+      });
+  }, []);
+
   return (
-    <section className="bg-[#FFF8F2]" aria-label="히어로 섹션">
-      <div className="section-container py-14 md:py-20">
+    <section className="bg-[#FFF8F2] pt-24" aria-label="히어로 섹션">
+      <div className="section-container py-10 md:py-14">
         <div className="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-10 md:gap-16 items-start">
 
-          {/* ── LEFT COLUMN ── */}
-          <div className="flex gap-3 md:gap-4">
-            {/* Main image + swatches + quick links */}
-            <div className="flex-1 flex flex-col gap-4">
-              {/* Main featured image block */}
-              <motion.div
-                className="relative rounded-2xl overflow-hidden"
-                style={{ aspectRatio: '4/5', backgroundColor: '#F5A0B5' }}
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: 'easeOut' }}
+          {/* ── LEFT COLUMN — 게시글 미리보기 그리드 ── */}
+          <motion.div
+            className="flex flex-col gap-3"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+          >
+            {/* 상단 큰 이미지 */}
+            <Link href={previews[0] ? `/post?id=${previews[0].id}` : '/community'}>
+              <div
+                className="relative w-full rounded-2xl overflow-hidden"
+                style={{ aspectRatio: '16/9' }}
               >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center select-none">
-                    <div className="text-8xl mb-3">🍀</div>
-                    <p className="text-xs tracking-[0.2em] uppercase font-medium" style={{ color: 'rgba(255,255,255,0.55)' }}>
-                      Gallery
-                    </p>
+                {previews[0]?.thumbnail ? (
+                  <Image
+                    src={previews[0].thumbnail}
+                    alt={previews[0].title}
+                    fill
+                    className="object-cover hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center" style={{ backgroundColor: CARD_COLORS[0] }}>
+                    <span className="text-xs font-medium uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                      gallery image
+                    </span>
                   </div>
-                </div>
-                {/* Badge */}
+                )}
                 <div className="absolute top-3 left-3">
-                  <span
-                    className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full text-white"
-                    style={{ backgroundColor: '#C82828' }}
-                  >
+                  <span className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full text-white" style={{ backgroundColor: '#C82828' }}>
                     New
                   </span>
                 </div>
-                {/* Heart button */}
-                <button
-                  className="absolute top-3 right-3 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors"
-                  aria-label="저장"
-                >
-                  <Heart size={14} style={{ color: '#C82828' }} />
-                </button>
-              </motion.div>
-
-              {/* Color swatches */}
-              <div className="flex items-center gap-3 px-1">
-                {SWATCHES.map(({ color }, i) => (
-                  <div
-                    key={i}
-                    className="w-5 h-5 rounded-full cursor-pointer hover:scale-110 transition-transform border-2"
-                    style={{ backgroundColor: color, borderColor: color }}
-                  />
-                ))}
               </div>
+            </Link>
 
-              {/* Quick link accordions */}
+            {/* 하단 두 개 이미지 */}
+            <div className="grid grid-cols-2 gap-3">
+              {[1, 2].map((i) => (
+                <Link key={i} href={previews[i] ? `/post?id=${previews[i].id}` : '/community'}>
+                  <div
+                    className="relative w-full rounded-2xl overflow-hidden"
+                    style={{ aspectRatio: '1/1' }}
+                  >
+                    {previews[i]?.thumbnail ? (
+                      <Image
+                        src={previews[i].thumbnail!}
+                        alt={previews[i].title}
+                        fill
+                        className="object-cover hover:scale-105 transition-transform duration-500"
+                        sizes="(max-width: 768px) 50vw, 25vw"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center" style={{ backgroundColor: CARD_COLORS[i] }}>
+                        <span className="text-xs font-medium uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                          gallery image
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            {/* Quick links */}
+            <div className="flex flex-col gap-2.5 mt-1">
               {QUICK_LINKS.map(({ label, href, bg, color }) => (
                 <Link
                   key={label}
                   href={href}
-                  className="flex items-center justify-between px-5 py-4 rounded-xl hover:opacity-90 transition-opacity"
+                  className="flex items-center justify-between px-5 py-3.5 rounded-xl hover:opacity-90 transition-opacity"
                   style={{ backgroundColor: bg }}
                 >
                   <span className="text-sm font-medium" style={{ color }}>{label}</span>
@@ -90,7 +119,7 @@ export default function HeroSection() {
                 </Link>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* ── RIGHT COLUMN ── */}
           <div className="flex flex-col justify-start pt-2">
@@ -188,6 +217,7 @@ export default function HeroSection() {
               </button>
             </motion.div>
           </div>
+
         </div>
       </div>
     </section>

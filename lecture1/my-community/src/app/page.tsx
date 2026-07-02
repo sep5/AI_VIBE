@@ -11,7 +11,8 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <MainLayout>
-      <section className="section-container pt-28 md:pt-32 pb-12 md:pb-16">
+      <HeroSection />
+      <section className="section-container py-12 md:py-16 pb-20">
         <div className="mb-10">
           <p className="text-xs tracking-[0.2em] uppercase mb-2" style={{ color: '#7E6E62' }}>Latest Posts</p>
           <h2
@@ -24,7 +25,6 @@ export default function HomePage() {
         <CommunityFeed />
       </section>
       <BannerSection />
-      <HeroSection />
     </MainLayout>
   );
 }
