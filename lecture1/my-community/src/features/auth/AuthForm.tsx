@@ -50,23 +50,36 @@ export default function AuthForm({ mode }: { mode: 'login' | 'signup' }) {
     handleSubmit,
     formState: { errors },
   } = useForm<SignupValues>({
-    resolver: zodResolver(signupSchema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: (isSignup ? zodResolver(signupSchema) : zodResolver(loginSchema)) as any,
   });
 
   const onSubmit = async (values: SignupValues) => {
     setIsLoading(true);
     try {
       if (isSignup) {
-        const { error } = await supabase.auth.signUp({
+        const { error: signUpError } = await supabase.auth.signUp({
           email: values.email,
           password: values.password,
-          options: {
-            data: { nickname: values.nickname },
-          },
+          options: { data: { nickname: values.nickname } },
         });
-        if (error) throw error;
-        toast.success('회원가입이 완료되었습니다! 로그인해주세요.');
-        router.push('/login');
+        if (signUpError) throw signUpError;
+
+        /* 가입 직후 자동 로그인 시도 */
+        const { error: loginError } = await supabase.auth.signInWithPassword({
+          email: values.email,
+          password: values.password,
+        });
+
+        if (loginError) {
+          /* 이메일 인증이 필요한 경우 */
+          toast.success('가입 완료! 이메일을 확인하고 인증 후 로그인해주세요.');
+          router.push('/login');
+        } else {
+          toast.success('가입 완료! 환영합니다.');
+          router.push('/');
+          router.refresh();
+        }
       } else {
         const { error } = await supabase.auth.signInWithPassword({
           email: values.email,
