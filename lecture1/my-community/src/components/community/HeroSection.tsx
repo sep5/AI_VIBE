@@ -27,7 +27,7 @@ export default function HeroSection() {
         className="absolute inset-0 opacity-30"
         style={{
           backgroundImage: `radial-gradient(circle at 20% 80%, #C41E2A15 0%, transparent 50%),
-                            radial-gradient(circle at 80% 20%, #4A78A015 0%, transparent 50%)`,
+                            radial-gradient(circle at 80% 20%, #8A786015 0%, transparent 50%)`,
         }}
       />
 
@@ -120,7 +120,7 @@ export default function HeroSection() {
               </motion.div>
 
               {/* Accent dot */}
-              <div className="absolute -top-3 -right-3 w-6 h-6 rounded-full bg-[#4A78A0]" />
+              <div className="absolute -top-3 -right-3 w-6 h-6 rounded-full bg-[#8A7860]" />
             </div>
           </motion.div>
         </div>

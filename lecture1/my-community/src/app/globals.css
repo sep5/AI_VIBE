@@ -1,11 +1,11 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 /* ─────────────────────────────────────────────
    Vintage Editorial Color System
-   이미지 레퍼런스 기반 — 웜 크림 + 딥 레드 + 더스티 블루
+   이미지 레퍼런스 기반 — 웜 크림 + 딥 레드 + 웜 스톤
 ───────────────────────────────────────────── */
 @theme inline {
   /* Color Tokens */
@@ -32,9 +32,9 @@
   --color-brand-crimson:       #C41E2A;   /* Vintage Deep Red */
   --color-brand-crimson-light: #DA3050;
   --color-brand-crimson-dark:  #9A1020;
-  --color-brand-blue:          #AAC4D6;   /* Dusty Blue */
-  --color-brand-blue-dark:     #3A6888;
-  --color-brand-blue-light:    #C4D8E8;
+  --color-brand-stone:         #C0B8AA;   /* Warm Stone */
+  --color-brand-stone-dark:    #6A5C4A;
+  --color-brand-stone-light:   #E0D8CC;
   --color-brand-beige:         #C8B898;   /* Warm Beige */
   --color-brand-cream:         #EEE8DF;   /* Warm Cream BG */
   --color-brand-card:          #F7F3ED;   /* Card Background */
@@ -82,7 +82,7 @@
   --secondary-foreground:   #28201A;
   --muted:                  #E8E2DA;   /* 뮤트 영역 */
   --muted-foreground:       #7E6E62;   /* 캡션, 보조 텍스트 */
-  --accent:                 #AAC4D6;   /* Dusty Blue — 포인트 */
+  --accent:                 #C0B8AA;   /* Warm Stone — 포인트 */
   --accent-foreground:      #28201A;
   --destructive:            #DC2626;
   --border:                 #D8D0C8;   /* 기본 구분선 */
@@ -116,7 +116,7 @@
   --secondary-foreground:   #F0EBE3;
   --muted:                  #282218;
   --muted-foreground:       #A09080;
-  --accent:                 #3A6888;   /* 다크 블루 */
+  --accent:                 #6A5C4A;   /* 다크 스톤 */
   --accent-foreground:      #FFFFFF;
   --destructive:            #EF4444;
   --border:                 #302820;

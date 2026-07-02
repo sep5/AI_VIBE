@@ -47,7 +47,7 @@ export default function PostCard({ post, index = 0 }: { post: Post; index?: numb
           ) : (
             <div className="w-full h-full flex items-center justify-center text-[#7E6E62]">
               <div className="text-center">
-                <span className="text-4xl">🌿</span>
+                <span className="text-4xl">🍀</span>
                 <p className="text-xs mt-2 tracking-wide">No Image</p>
               </div>
             </div>
