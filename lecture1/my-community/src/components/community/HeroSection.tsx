@@ -10,11 +10,6 @@ import type { Post } from '@/types';
 
 const CARD_COLORS = ['#C82828', '#F5A0B5', '#88C0D0'];
 
-const QUICK_LINKS = [
-  { label: '오늘의 인기글', href: '/community?sort=popular', bg: '#F5A0B5', color: '#8C2018' },
-  { label: '새로운 이야기', href: '/community', bg: '#88C0D0', color: '#1A4A5A' },
-];
-
 const FEATURES = [
   '무제한 글 작성 및 갤러리 공유',
   '댓글, 좋아요로 소통하기',
@@ -22,18 +17,57 @@ const FEATURES = [
   '실시간 인기글 확인',
 ];
 
+/** 미니 게시글 행 */
+function PostRow({ post, index }: { post: Post; index: number }) {
+  return (
+    <Link
+      href={`/post?id=${post.id}`}
+      className="flex items-center gap-3 px-4 py-2.5 hover:bg-black/5 rounded-lg transition-colors"
+    >
+      <div
+        className="w-9 h-9 rounded-lg overflow-hidden flex-shrink-0 relative"
+        style={{ backgroundColor: CARD_COLORS[index % CARD_COLORS.length] }}
+      >
+        {post.thumbnail && (
+          <Image src={post.thumbnail} alt={post.title} fill className="object-cover" sizes="36px" />
+        )}
+      </div>
+      <span className="text-sm font-medium truncate" style={{ color: 'inherit' }}>
+        {post.title}
+      </span>
+    </Link>
+  );
+}
+
 export default function HeroSection() {
-  const [previews, setPreviews] = useState<Post[]>([]);
+  const [featuredPost, setFeaturedPost] = useState<Post | null>(null);
+  const [popularPosts, setPopularPosts] = useState<Post[]>([]);
+  const [latestPosts, setLatestPosts] = useState<Post[]>([]);
 
   useEffect(() => {
+    /* 대표 이미지 — 가장 최신 글 1개 */
+    supabase
+      .from('posts')
+      .select('id, title, thumbnail')
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .then(({ data }) => { if (data?.[0]) setFeaturedPost(data[0] as Post); });
+
+    /* 인기글 — likes_count 내림차순 3개 */
+    supabase
+      .from('posts')
+      .select('id, title, thumbnail, likes_count')
+      .order('likes_count', { ascending: false })
+      .limit(3)
+      .then(({ data }) => { if (data) setPopularPosts(data as Post[]); });
+
+    /* 새로운 이야기 — 최신순 3개 */
     supabase
       .from('posts')
       .select('id, title, thumbnail')
       .order('created_at', { ascending: false })
       .limit(3)
-      .then(({ data }) => {
-        if (data) setPreviews(data as Post[]);
-      });
+      .then(({ data }) => { if (data) setLatestPosts(data as Post[]); });
   }, []);
 
   return (
@@ -41,7 +75,7 @@ export default function HeroSection() {
       <div className="section-container py-10 md:py-14">
         <div className="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-10 md:gap-16 items-start">
 
-          {/* ── LEFT COLUMN — 게시글 미리보기 그리드 ── */}
+          {/* ── LEFT COLUMN ── */}
           <motion.div
             className="flex flex-col gap-3"
             initial={{ opacity: 0, y: 24 }}
@@ -49,15 +83,12 @@ export default function HeroSection() {
             transition={{ duration: 0.7, ease: 'easeOut' }}
           >
             {/* 대표 이미지 1개 */}
-            <Link href={previews[0] ? `/post?id=${previews[0].id}` : '/community'}>
-              <div
-                className="relative w-full rounded-2xl overflow-hidden"
-                style={{ aspectRatio: '4/5' }}
-              >
-                {previews[0]?.thumbnail ? (
+            <Link href={featuredPost ? `/post?id=${featuredPost.id}` : '/community'}>
+              <div className="relative w-full rounded-2xl overflow-hidden" style={{ aspectRatio: '4/5' }}>
+                {featuredPost?.thumbnail ? (
                   <Image
-                    src={previews[0].thumbnail}
-                    alt={previews[0].title}
+                    src={featuredPost.thumbnail}
+                    alt={featuredPost.title}
                     fill
                     className="object-cover hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -77,19 +108,40 @@ export default function HeroSection() {
               </div>
             </Link>
 
-            {/* Quick links */}
-            <div className="flex flex-col gap-2.5 mt-1">
-              {QUICK_LINKS.map(({ label, href, bg, color }) => (
-                <Link
-                  key={label}
-                  href={href}
-                  className="flex items-center justify-between px-5 py-3.5 rounded-xl hover:opacity-90 transition-opacity"
-                  style={{ backgroundColor: bg }}
-                >
-                  <span className="text-sm font-medium" style={{ color }}>{label}</span>
-                  <ArrowRight size={15} style={{ color }} />
-                </Link>
-              ))}
+            {/* 오늘의 인기글 패널 */}
+            <div className="rounded-xl overflow-hidden" style={{ backgroundColor: '#F5A0B5' }}>
+              <Link
+                href="/community?sort=popular"
+                className="flex items-center justify-between px-5 py-3.5 hover:opacity-90 transition-opacity"
+              >
+                <span className="text-sm font-semibold" style={{ color: '#8C2018' }}>오늘의 인기글</span>
+                <ArrowRight size={15} style={{ color: '#8C2018' }} />
+              </Link>
+              {popularPosts.length > 0 && (
+                <div className="px-1 pb-2" style={{ color: '#8C2018' }}>
+                  {popularPosts.map((post, i) => (
+                    <PostRow key={post.id} post={post} index={i} />
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* 새로운 이야기 패널 */}
+            <div className="rounded-xl overflow-hidden" style={{ backgroundColor: '#88C0D0' }}>
+              <Link
+                href="/community"
+                className="flex items-center justify-between px-5 py-3.5 hover:opacity-90 transition-opacity"
+              >
+                <span className="text-sm font-semibold" style={{ color: '#1A4A5A' }}>새로운 이야기</span>
+                <ArrowRight size={15} style={{ color: '#1A4A5A' }} />
+              </Link>
+              {latestPosts.length > 0 && (
+                <div className="px-1 pb-2" style={{ color: '#1A4A5A' }}>
+                  {latestPosts.map((post, i) => (
+                    <PostRow key={post.id} post={post} index={i} />
+                  ))}
+                </div>
+              )}
             </div>
           </motion.div>
 
