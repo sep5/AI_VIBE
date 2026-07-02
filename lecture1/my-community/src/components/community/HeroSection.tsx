@@ -4,11 +4,6 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Star, Heart, ArrowRight } from 'lucide-react';
 
-const THUMBNAILS = [
-  { bg: '#C82828' },
-  { bg: '#88C0D0' },
-];
-
 const SWATCHES = [
   { color: '#C82828' },
   { color: '#F5A0B5' },
@@ -35,17 +30,6 @@ export default function HeroSection() {
 
           {/* ── LEFT COLUMN ── */}
           <div className="flex gap-3 md:gap-4">
-            {/* Thumbnail strip */}
-            <div className="hidden md:flex flex-col gap-2.5 pt-1 flex-shrink-0">
-              {THUMBNAILS.map(({ bg }, i) => (
-                <div
-                  key={i}
-                  className="w-[60px] h-[60px] rounded-xl cursor-pointer hover:opacity-80 transition-opacity"
-                  style={{ backgroundColor: bg }}
-                />
-              ))}
-            </div>
-
             {/* Main image + swatches + quick links */}
             <div className="flex-1 flex flex-col gap-4">
               {/* Main featured image block */}

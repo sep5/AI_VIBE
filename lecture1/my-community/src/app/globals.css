@@ -185,7 +185,7 @@
 @layer utilities {
   /* Container — 섹션 너비 표준 */
   .section-container {
-    @apply mx-auto w-full max-w-7xl px-6 md:px-20 lg:px-30;
+    @apply mx-auto w-full max-w-7xl px-6 md:px-12 lg:px-16;
   }
 
   /* Typography — Editorial Serif */
