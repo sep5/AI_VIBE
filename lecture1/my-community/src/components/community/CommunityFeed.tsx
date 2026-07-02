@@ -8,6 +8,9 @@ import { supabase } from '@/lib/supabase';
 import type { Post } from '@/types';
 
 async function fetchPosts(sort = 'latest'): Promise<Post[]> {
+  const { data: { session } } = await supabase.auth.getSession();
+  const userId = session?.user?.id;
+
   let query = supabase
     .from('posts')
     .select(`
@@ -27,11 +30,23 @@ async function fetchPosts(sort = 'latest'): Promise<Post[]> {
   const { data, error } = await query.limit(20);
   if (error) throw error;
 
-  return (data ?? []).map((post) => ({
+  const posts = (data ?? []).map((post) => ({
     ...post,
     likes_count: Array.isArray(post.likes_count) ? post.likes_count[0]?.count ?? 0 : 0,
     comments_count: Array.isArray(post.comments_count) ? post.comments_count[0]?.count ?? 0 : 0,
+    is_liked: false,
   }));
+
+  if (!userId || posts.length === 0) return posts;
+
+  const { data: likedRows } = await supabase
+    .from('likes')
+    .select('post_id')
+    .eq('user_id', userId)
+    .in('post_id', posts.map((p) => p.id));
+
+  const likedSet = new Set((likedRows ?? []).map((r) => r.post_id));
+  return posts.map((p) => ({ ...p, is_liked: likedSet.has(p.id) }));
 }
 
 /**
