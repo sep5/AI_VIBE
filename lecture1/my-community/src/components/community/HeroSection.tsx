@@ -48,11 +48,11 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
           >
-            {/* 상단 큰 이미지 */}
+            {/* 대표 이미지 1개 */}
             <Link href={previews[0] ? `/post?id=${previews[0].id}` : '/community'}>
               <div
                 className="relative w-full rounded-2xl overflow-hidden"
-                style={{ aspectRatio: '16/9' }}
+                style={{ aspectRatio: '4/5' }}
               >
                 {previews[0]?.thumbnail ? (
                   <Image
@@ -76,34 +76,6 @@ export default function HeroSection() {
                 </div>
               </div>
             </Link>
-
-            {/* 하단 두 개 이미지 */}
-            <div className="grid grid-cols-2 gap-3">
-              {[1, 2].map((i) => (
-                <Link key={i} href={previews[i] ? `/post?id=${previews[i].id}` : '/community'}>
-                  <div
-                    className="relative w-full rounded-2xl overflow-hidden"
-                    style={{ aspectRatio: '1/1' }}
-                  >
-                    {previews[i]?.thumbnail ? (
-                      <Image
-                        src={previews[i].thumbnail!}
-                        alt={previews[i].title}
-                        fill
-                        className="object-cover hover:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 768px) 50vw, 25vw"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center" style={{ backgroundColor: CARD_COLORS[i] }}>
-                        <span className="text-xs font-medium uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                          gallery image
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </Link>
-              ))}
-            </div>
 
             {/* Quick links */}
             <div className="flex flex-col gap-2.5 mt-1">
