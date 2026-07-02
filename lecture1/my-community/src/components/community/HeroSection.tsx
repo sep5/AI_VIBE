@@ -79,7 +79,7 @@ export default function HeroSection() {
                 <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
               </Link>
               <Link
-                href="/login"
+                href="/post/create"
                 className="inline-flex items-center gap-2 px-6 py-3 border border-[#C41E2A] text-[#C41E2A] text-sm font-medium rounded-full hover:bg-[#C41E2A] hover:text-white transition-colors duration-200"
               >
                 글 작성하기
