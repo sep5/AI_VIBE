@@ -24,8 +24,8 @@ const FEATURES = [
 
 export default function HeroSection() {
   return (
-    <section className="bg-[#FFF8F2] pt-24" aria-label="히어로 섹션">
-      <div className="section-container py-10 md:py-14">
+    <section className="bg-[#FFF8F2]" aria-label="히어로 섹션">
+      <div className="section-container py-14 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-10 md:gap-16 items-start">
 
           {/* ── LEFT COLUMN ── */}
