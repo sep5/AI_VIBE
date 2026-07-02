@@ -45,7 +45,11 @@ export default function PostCard({ post, index = 0 }: { post: Post; index?: numb
               className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
           ) : (
-            <div className="w-full h-full bg-[#4A7A30]" />
+            <div className="w-full h-full bg-[#4A7A30] flex items-center justify-center">
+              <span className="text-xs font-medium uppercase select-none" style={{ color: 'rgba(255,255,255,0.5)', letterSpacing: '0.2em' }}>
+                gallery image
+              </span>
+            </div>
           )}
           {/* Hover overlay */}
           <div className="absolute inset-0 bg-[#C41E2A]/0 group-hover:bg-[#C41E2A]/5 transition-colors duration-300" />
