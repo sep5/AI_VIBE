@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { cn } from '@/utils/cn';
 import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
@@ -31,58 +32,67 @@ export default function LikeButton({
   const [count, setCount] = useState(initialCount);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isPending, setIsPending] = useState(false);
+  const router = useRouter();
 
   const handleLike = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     if (isPending) return;
 
-    const { data: sessionData } = await supabase.auth.getSession();
-    if (!sessionData.session) {
-      toast.error('로그인 후 이용해주세요.');
-      return;
-    }
-
-    const userId = sessionData.session.user.id;
-    const prevLiked = liked;
-    const prevCount = count;
-
-    /* 낙관적 업데이트 */
-    setIsPending(true);
-    setIsAnimating(true);
-    setLiked(!liked);
-    setCount((c) => (liked ? c - 1 : c + 1));
-
     try {
-      if (prevLiked) {
-        const { error } = await supabase
-          .from('likes')
-          .delete()
-          .eq('post_id', postId)
-          .eq('user_id', userId);
-        if (error) throw error;
-      } else {
-        const { error } = await supabase
-          .from('likes')
-          .insert({ post_id: postId, user_id: userId });
-        if (error) throw error;
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast.error('로그인 후 이용해주세요.');
+        router.push('/login');
+        return;
       }
 
-      /* DB 실제 카운트로 동기화 */
-      const { count: actual } = await supabase
-        .from('likes')
-        .select('*', { count: 'exact', head: true })
-        .eq('post_id', postId);
-      if (actual !== null) setCount(actual);
+      const userId = session.user.id;
+      const prevLiked = liked;
+      const prevCount = count;
 
-    } catch {
-      /* 실패 시 롤백 */
-      setLiked(prevLiked);
-      setCount(prevCount);
-      toast.error('처리 중 오류가 발생했습니다.');
-    } finally {
-      setIsPending(false);
-      setTimeout(() => setIsAnimating(false), 250);
+      /* 낙관적 업데이트 */
+      setIsPending(true);
+      setIsAnimating(true);
+      setLiked(!liked);
+      setCount((c) => (liked ? c - 1 : c + 1));
+
+      try {
+        if (prevLiked) {
+          const { error } = await supabase
+            .from('likes')
+            .delete()
+            .eq('post_id', postId)
+            .eq('user_id', userId);
+          if (error) throw error;
+        } else {
+          const { error } = await supabase
+            .from('likes')
+            .insert({ post_id: postId, user_id: userId });
+          if (error) throw error;
+        }
+
+        /* DB 실제 카운트로 동기화 */
+        const { count: actual } = await supabase
+          .from('likes')
+          .select('*', { count: 'exact', head: true })
+          .eq('post_id', postId);
+        if (actual !== null) setCount(actual);
+
+      } catch (err) {
+        /* 실패 시 롤백 */
+        setLiked(prevLiked);
+        setCount(prevCount);
+        toast.error('처리 중 오류가 발생했습니다.');
+        console.error('[LikeButton] DB error:', err);
+      } finally {
+        setIsPending(false);
+        setTimeout(() => setIsAnimating(false), 250);
+      }
+    } catch (err) {
+      console.error('[LikeButton] Auth error:', err);
+      toast.error('인증 오류가 발생했습니다. 다시 로그인해 주세요.');
+      router.push('/login');
     }
   };
 

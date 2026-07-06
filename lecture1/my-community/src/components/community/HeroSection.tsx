@@ -53,13 +53,26 @@ export default function HeroSection() {
       .limit(1)
       .then(({ data }) => { if (data?.[0]) setFeaturedPost(data[0] as Post); });
 
-    /* 인기글 — likes_count 내림차순 3개 */
+    /* 인기글 — likes 수 기준 상위 3개 (클라이언트 정렬) */
     supabase
       .from('posts')
-      .select('id, title, thumbnail, likes_count')
-      .order('likes_count', { ascending: false })
-      .limit(3)
-      .then(({ data }) => { if (data) setPopularPosts(data as Post[]); });
+      .select('id, title, thumbnail, likes:likes(count)')
+      .order('created_at', { ascending: false })
+      .limit(20)
+      .then(({ data }) => {
+        if (data) {
+          const sorted = (data as unknown as Array<{ id: string; title: string; thumbnail: string | null; likes: Array<{ count: number }> }>)
+            .map((p) => ({
+              id: p.id,
+              title: p.title,
+              thumbnail: p.thumbnail,
+              likes_count: Array.isArray(p.likes) ? p.likes[0]?.count ?? 0 : 0,
+            } as Post))
+            .sort((a, b) => (b.likes_count ?? 0) - (a.likes_count ?? 0))
+            .slice(0, 3);
+          setPopularPosts(sorted);
+        }
+      });
 
     /* 새로운 이야기 — 최신순 3개 */
     supabase
