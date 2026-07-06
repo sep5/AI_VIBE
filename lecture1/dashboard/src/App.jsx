@@ -1,22 +1,31 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
   Box,
-  Container,
-  Typography,
-  AppBar,
-  Toolbar,
-  Divider,
   Snackbar,
   Alert,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
-import CollectionsIcon from '@mui/icons-material/Collections';
+import Grid from '@mui/material/Grid';
+import ImageIcon from '@mui/icons-material/Image';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import TodayIcon from '@mui/icons-material/Today';
 import { supabase } from './lib/supabase';
+import Sidebar from './components/common/Sidebar';
+import TopBar from './components/common/TopBar';
+import RightPanel from './components/common/RightPanel';
+import StatCard from './components/ui/StatCard';
 import ImageUploader from './components/ui/ImageUploader';
 import ImageGallery from './components/ui/ImageGallery';
 
 function App() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isTablet = useMediaQuery(theme.breakpoints.down('lg'));
+
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeNav, setActiveNav] = useState('gallery');
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
 
   const showSnackbar = (message, severity = 'success') => {
@@ -38,14 +47,8 @@ function App() {
     const imageList = (data || [])
       .filter((f) => f.name !== '.emptyFolderPlaceholder')
       .map((file) => {
-        const { data: urlData } = supabase.storage
-          .from('images')
-          .getPublicUrl(file.name);
-        return {
-          name: file.name,
-          url: urlData.publicUrl,
-          createdAt: file.created_at,
-        };
+        const { data: urlData } = supabase.storage.from('images').getPublicUrl(file.name);
+        return { name: file.name, url: urlData.publicUrl, createdAt: file.created_at };
       });
 
     setImages(imageList);
@@ -71,35 +74,94 @@ function App() {
     fetchImages();
   };
 
+  const now = new Date();
+
+  const stats = [
+    {
+      label: '전체 이미지',
+      value: images.length,
+      unit: '장',
+      icon: <ImageIcon />,
+      color: '#A8C4D8',
+      iconBg: '#4A6FA5',
+    },
+    {
+      label: '이번 달 업로드',
+      value: images.filter((img) => {
+        if (!img.createdAt) return false;
+        const d = new Date(img.createdAt);
+        return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+      }).length,
+      unit: '장',
+      icon: <CloudUploadIcon />,
+      color: '#F5A0AA',
+      iconBg: '#E8909A',
+    },
+    {
+      label: '오늘 업로드',
+      value: images.filter((img) => {
+        if (!img.createdAt) return false;
+        return new Date(img.createdAt).toDateString() === now.toDateString();
+      }).length,
+      unit: '장',
+      icon: <TodayIcon />,
+      color: '#F0EBE3',
+      iconBg: '#C8102E',
+    },
+  ];
+
   return (
-    <Box sx={{ width: '100%', minHeight: '100vh', bgcolor: 'grey.100' }}>
-      <AppBar position='static' elevation={1}>
-        <Toolbar>
-          <CollectionsIcon sx={{ mr: 1 }} />
-          <Typography variant='h6' fontWeight={700}>
-            Image Dashboard
-          </Typography>
-        </Toolbar>
-      </AppBar>
+    <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: 'background.default' }}>
+      {/* 좌측 사이드바 */}
+      {!isMobile && (
+        <Sidebar activeNav={activeNav} onNavChange={setActiveNav} />
+      )}
 
-      <Container maxWidth='xl' sx={{ py: { xs: 3, md: 5 } }}>
-        <Box sx={{ mb: 4 }}>
-          <Typography variant='h5' fontWeight={700} gutterBottom>
-            이미지 업로드
-          </Typography>
-          <ImageUploader onUploadSuccess={handleUploadSuccess} />
+      {/* 메인 영역 */}
+      <Box
+        sx={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+          minWidth: 0,
+        }}
+      >
+        {/* 상단 바 */}
+        <TopBar imageCount={images.length} />
+
+        {/* 스크롤 가능한 콘텐츠 */}
+        <Box sx={{ flex: 1, overflowY: 'auto', p: { xs: 2, md: 3 } }}>
+          {/* 지표 카드 3열 */}
+          <Grid container spacing={2} sx={{ mb: 3 }}>
+            {stats.map((stat) => (
+              <Grid size={{ xs: 12, sm: 4 }} key={stat.label}>
+                <StatCard {...stat} />
+              </Grid>
+            ))}
+          </Grid>
+
+          {/* 이미지 업로더 */}
+          <Box sx={{ mb: 3 }}>
+            <ImageUploader onUploadSuccess={handleUploadSuccess} />
+          </Box>
+
+          {/* 이미지 갤러리 */}
+          <ImageGallery
+            images={images}
+            isLoading={isLoading}
+            onDelete={handleDelete}
+            onRefresh={fetchImages}
+          />
         </Box>
+      </Box>
 
-        <Divider sx={{ mb: 4 }} />
+      {/* 우측 패널 (lg 이상에서만 표시) */}
+      {!isTablet && (
+        <RightPanel images={images} />
+      )}
 
-        <ImageGallery
-          images={images}
-          isLoading={isLoading}
-          onDelete={handleDelete}
-          onRefresh={fetchImages}
-        />
-      </Container>
-
+      {/* 알림 스낵바 */}
       <Snackbar
         open={snackbar.open}
         autoHideDuration={3000}

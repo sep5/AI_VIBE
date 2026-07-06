@@ -1,3 +1,29 @@
+:root {
+  --color-primary: #C8102E;
+  --color-primary-light: #E8394F;
+  --color-primary-dark: #9C0020;
+  --color-secondary: #1A1A1A;
+  --color-accent: #A8C4D8;
+
+  --color-bg-primary: #F0EBE3;
+  --color-bg-secondary: #1A1A1A;
+  --color-bg-card-blue: #A8C4D8;
+  --color-bg-card-pink: #F5A0AA;
+
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #FFFFFF;
+  --color-text-muted: #6B5B52;
+
+  --color-border-blue: #4A6FA5;
+  --color-border-pink: #E8909A;
+  --color-border-default: #DDD5CB;
+
+  --color-button-primary: #1A1A1A;
+  --color-button-hover: #C8102E;
+  --color-link: #4A6FA5;
+  --color-link-hover: #C8102E;
+}
+
 * {
   box-sizing: border-box;
 }
