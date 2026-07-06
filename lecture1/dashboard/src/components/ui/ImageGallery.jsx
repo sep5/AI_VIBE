@@ -45,9 +45,11 @@ function ImageGallery({ images, isLoading, onDelete, onRefresh }) {
           </Typography>
         </Typography>
         <Tooltip title='새로고침'>
-          <IconButton onClick={onRefresh} disabled={isLoading}>
-            <RefreshIcon />
-          </IconButton>
+          <span>
+            <IconButton onClick={onRefresh} disabled={isLoading}>
+              <RefreshIcon />
+            </IconButton>
+          </span>
         </Tooltip>
       </Box>
 
