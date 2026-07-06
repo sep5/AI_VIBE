@@ -11,7 +11,7 @@ async function fetchPosts(sort = 'latest'): Promise<Post[]> {
   const { data: { session } } = await supabase.auth.getSession();
   const userId = session?.user?.id;
 
-  let query = supabase
+  const { data, error } = await supabase
     .from('posts')
     .select(`
       *,
@@ -19,23 +19,22 @@ async function fetchPosts(sort = 'latest'): Promise<Post[]> {
       images:post_images(id, image_url, order),
       likes_count:likes(count),
       comments_count:comments(count)
-    `);
+    `)
+    .order('created_at', { ascending: false })
+    .limit(sort === 'popular' ? 50 : 20);
 
-  if (sort === 'popular') {
-    query = query.order('likes_count', { ascending: false });
-  } else {
-    query = query.order('created_at', { ascending: false });
-  }
-
-  const { data, error } = await query.limit(20);
   if (error) throw error;
 
-  const posts = (data ?? []).map((post) => ({
+  let posts = (data ?? []).map((post) => ({
     ...post,
     likes_count: Array.isArray(post.likes_count) ? post.likes_count[0]?.count ?? 0 : 0,
     comments_count: Array.isArray(post.comments_count) ? post.comments_count[0]?.count ?? 0 : 0,
     is_liked: false,
   }));
+
+  if (sort === 'popular') {
+    posts = posts.sort((a, b) => (b.likes_count ?? 0) - (a.likes_count ?? 0)).slice(0, 20);
+  }
 
   if (!userId || posts.length === 0) return posts;
 
