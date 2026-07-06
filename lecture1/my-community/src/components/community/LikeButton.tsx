@@ -71,14 +71,6 @@ export default function LikeButton({
             .insert({ post_id: postId, user_id: userId });
           if (error) throw error;
         }
-
-        /* DB 실제 카운트로 동기화 */
-        const { count: actual } = await supabase
-          .from('likes')
-          .select('*', { count: 'exact', head: true })
-          .eq('post_id', postId);
-        if (actual !== null) setCount(actual);
-
       } catch (err) {
         /* 실패 시 롤백 */
         setLiked(prevLiked);
